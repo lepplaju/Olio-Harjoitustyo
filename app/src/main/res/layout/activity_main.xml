@@ -12,6 +12,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="80dp"
 
+        android:onClick="makeNewLutemonView"
         android:text="Add new Lutemon"
         android:textColor="@color/dark"
         app:cornerRadius="5dp"
@@ -24,6 +25,7 @@
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
+        android:onClick="listLutemonsBtn"
         android:text="List Lutemons"
         app:cornerRadius="5dp"
         app:layout_constraintEnd_toEndOf="@+id/addLutemonBtn"
