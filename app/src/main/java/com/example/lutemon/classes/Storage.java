@@ -3,9 +3,13 @@ package com.example.lutemon.classes;
 import java.util.ArrayList;
 
 public class Storage {
-    private String name;
-    private ArrayList<Lutemon> lutemons;
+    protected String name;
+    protected ArrayList<Lutemon> lutemons;
 
+    public Storage(){
+        name = "default";
+        lutemons = new ArrayList<>();
+    }
     public void addLutemon(Lutemon lutemon){
 
     }
@@ -14,6 +18,8 @@ public class Storage {
         return null;
     }
     public void listLutemons(){
-
+        for (Lutemon lutemon: lutemons ) {
+            System.out.println(lutemon.getName() + lutemon.getType());
+        }
     }
 }
