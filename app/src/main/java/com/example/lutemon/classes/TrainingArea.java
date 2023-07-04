@@ -1,4 +1,4 @@
-package com.example.lutemon.myClasses;
+package com.example.lutemon.classes;
 
 public class TrainingArea extends Storage{
 
