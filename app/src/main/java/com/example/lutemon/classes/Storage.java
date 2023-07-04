@@ -1,4 +1,4 @@
-package com.example.lutemon.myClasses;
+package com.example.lutemon.classes;
 
 import java.util.ArrayList;
 
