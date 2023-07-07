@@ -28,4 +28,9 @@ public class MainActivity extends AppCompatActivity {
         storage = Home.getInstance();
         storage.listLutemons();
     }
+
+    public void moveLutemonsView(View view){
+        Intent intent = new Intent(MainActivity.this, MoveLutemons.class);
+        startActivity(intent);
+    }
 }
