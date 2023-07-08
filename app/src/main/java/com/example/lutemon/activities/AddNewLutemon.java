@@ -38,6 +38,8 @@ public class AddNewLutemon extends AppCompatActivity {
         storage = Home.getInstance();
         storage.createLutemon(lutemonToAdd);
 
+        storage.listLutemons();
+
         Intent intent = new Intent(AddNewLutemon.this, MainActivity.class);
         startActivity(intent);
     }

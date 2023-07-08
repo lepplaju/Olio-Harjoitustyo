@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lutemon"
         tools:targetApi="31">
+        <activity android:name=".activities.LutemonListingView"
+            android:exported="false"/>
         <activity
             android:name=".activities.MoveLutemons"
             android:exported="false" />

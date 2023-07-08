@@ -13,18 +13,28 @@
         android:background="@color/middle">
 
         <TextView
+            android:id="@+id/uniqueinfotvholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="information" />
+
+        <TextView
+            android:id="@+id/strengthtvholder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Strength"></TextView>
         <TextView
+            android:id="@+id/defencetvholder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Defence"></TextView>
         <TextView
+            android:id="@+id/hitpointstvholder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hitpoints"></TextView>
         <TextView
+            android:id="@+id/exptvholder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="exp"></TextView>

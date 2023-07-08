@@ -1,5 +1,7 @@
 package com.example.lutemon.classes;
 
+import java.util.ArrayList;
+
 public class Home extends Storage{
     private static Home storage;
     private Home(){
@@ -15,4 +17,6 @@ public class Home extends Storage{
     public void createLutemon(Lutemon lutemon){
         lutemons.add(lutemon);
     }
+
+
 }

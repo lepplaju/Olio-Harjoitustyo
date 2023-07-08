@@ -3,16 +3,24 @@ package com.example.lutemon.classes;
 public class Lutemon {
     private String name;
     private String type;
-    private int attack = 0;
-    private int defence = 0;
-    private int experience = 0;
-    private int health = 0;
-    private int maxHealth = 0;
+    private int attack = 1;
+    private int defence = 1;
+    private int experience = 1;
+    private int health = 1;
+    private int maxHealth = 1;
     private int id;
 
     public Lutemon(String type, String name){
         this.type = type;
         this.name = name;
+    }
+    public Lutemon(String type, String name, int attack, int defence, int hp, int exp){
+        this.type= type;
+        this.name = name;
+        this.attack = attack;
+        this.defence = defence;
+        this.health = hp;
+        this.experience = exp;
     }
 
     public void defence(Lutemon lutemon){
@@ -31,6 +39,22 @@ public class Lutemon {
     }
     public String getName(){
         return name;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public int getDefence() {
+        return defence;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public int getHealth() {
+        return health;
     }
 }
 
