@@ -15,7 +15,6 @@ public class LutemonListingView extends AppCompatActivity {
     private RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("Vielä pystyssä");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lutemon_listing_view);
 

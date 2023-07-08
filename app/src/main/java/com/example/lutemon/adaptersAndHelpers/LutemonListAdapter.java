@@ -35,7 +35,7 @@ public class LutemonListAdapter extends RecyclerView.Adapter<LutemonViewHelper> 
         holder.strength.setText("Attack: " + String.valueOf(lutemon.getAttack()));
         holder.defence.setText("Defence: " + String.valueOf(lutemon.getDefence()));
         holder.exp.setText("exp: " + String.valueOf(lutemon.getExperience()));
-        holder.hitpoints.setText("HP: " + String.valueOf(lutemon.getHealth()));
+        holder.hitpoints.setText("HP: " + String.valueOf(lutemon.getHealth()) + "/" +lutemon.getMaxHealth());
     }
     @Override
     public int getItemCount() {

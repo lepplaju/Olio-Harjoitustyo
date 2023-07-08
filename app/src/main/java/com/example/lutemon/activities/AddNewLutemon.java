@@ -12,6 +12,9 @@ import android.widget.RadioGroup;
 import com.example.lutemon.R;
 import com.example.lutemon.classes.Home;
 import com.example.lutemon.classes.Lutemon;
+import com.example.lutemon.uniqueLutemonTypes.FireLutemon;
+import com.example.lutemon.uniqueLutemonTypes.GrassLutemon;
+import com.example.lutemon.uniqueLutemonTypes.WaterLutemon;
 
 public class AddNewLutemon extends AppCompatActivity {
 
@@ -24,7 +27,7 @@ public class AddNewLutemon extends AppCompatActivity {
         setContentView(R.layout.activity_add_new_lutemon);
     }
 
-    public void addLutemon(View view){
+    public void addLutemon(View view) {
 
         lutemonTypesGroup = findViewById(R.id.lutemonTyperRG);
         int chosenBtnId = lutemonTypesGroup.getCheckedRadioButtonId();
@@ -33,7 +36,22 @@ public class AddNewLutemon extends AppCompatActivity {
         EditText nameField = findViewById(R.id.lutemonNameField);
         String lutemonName = nameField.getText().toString();
 
-        Lutemon lutemonToAdd = new Lutemon(type, lutemonName);
+        Lutemon lutemonToAdd;
+        switch (type) {
+            case "Fire":
+                lutemonToAdd = new FireLutemon(lutemonName);
+                break;
+            case "Water":
+                lutemonToAdd = new WaterLutemon(lutemonName);
+                break;
+            case "Grass":
+                lutemonToAdd = new GrassLutemon(lutemonName);
+                break;
+            default:
+                lutemonToAdd = new Lutemon("Normal", lutemonName);
+                break;
+        }
+
 
         storage = Home.getInstance();
         storage.createLutemon(lutemonToAdd);
