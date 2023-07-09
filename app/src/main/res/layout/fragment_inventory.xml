@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.HomeFragment"
-    android:background="@color/light">
+    tools:context=".fragments.InventoryFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,7 +11,7 @@
         android:orientation="vertical">
 
         <RadioGroup
-            android:id="@+id/lutemonRadioGroup"
+            android:id="@+id/lutemonRadioGroupInvent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -24,11 +23,11 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/moveButton"
+        android:id="@+id/moveButtonInvent"
         android:layout_width="250dp"
         android:layout_height="75dp"
         android:layout_gravity="bottom|center_horizontal"
-        android:onClick="moveLutemonToInvent"
-        android:text="Move chosen Lutemon to inventory" />
+        android:onClick="moveLutemonToHomeFunc"
+        android:text="Move chosen Lutemon to home" />
 
 </FrameLayout>

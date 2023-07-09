@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="4"
+        android:weightSum="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,19 +25,11 @@
             style="@style/CustomButtonStyle2"/>
 
         <Button
-            android:id="@+id/trainBtn"
+            android:id="@+id/inventoryBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Train"
-            style="@style/CustomButtonStyle2"/>
-
-        <Button
-            android:id="@+id/battleBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Battle"
+            android:text="Inventory"
             style="@style/CustomButtonStyle2"/>
 
         <Button
