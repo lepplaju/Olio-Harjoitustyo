@@ -30,6 +30,12 @@ public class MoveLutemons extends AppCompatActivity {
         fragmentTrain.setOnClickListener(listener);
         fragmentBattle.setOnClickListener(listener);
         fragmentGraveyard.setOnClickListener(listener);
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frameContainer, new HomeFragment())
+                    .commit();
+        }
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {

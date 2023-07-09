@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:padding="5dp"
         android:layout_marginTop="5dp"
-        android:background="@color/middle">
+        android:background="@color/light_red">
 
         <TextView
             android:id="@+id/uniqueinfotvholder"

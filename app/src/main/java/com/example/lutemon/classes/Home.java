@@ -15,8 +15,16 @@ public class Home extends Storage{
     }
 
     public void createLutemon(Lutemon lutemon){
+        lutemon.setLocation("Home");
         lutemons.add(lutemon);
     }
 
+    public void moveLutemonToInventory(Lutemon lutemon){
+        Inventory inventory = Inventory.getInstance();
+        lutemon.setLocation("Inventory");
+        inventory.addLutemon(lutemon);
+        lutemons.remove(lutemon);
+
+    }
 
 }

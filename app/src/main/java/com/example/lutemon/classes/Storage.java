@@ -1,5 +1,7 @@
 package com.example.lutemon.classes;
 
+import com.example.lutemon.adaptersAndHelpers.LutemonViewHelper;
+
 import java.util.ArrayList;
 
 public class Storage {
@@ -28,5 +30,6 @@ public class Storage {
     public ArrayList<Lutemon> getLutemons() {
         return lutemons;
     }
+
 
 }

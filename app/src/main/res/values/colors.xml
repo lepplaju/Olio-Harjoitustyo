@@ -2,12 +2,17 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="buttonPrimaryColor">#FF0000</color>
     <color name="gray">#808080</color>
 
     <color name="light">#f7f7f2</color>
     <color name="semi_light">#e4e6c3</color>
-    <color name="middle">#899878</color>
+    <color name="green1">#899878</color>
+    <color name="green2">#BCAF4D</color>
+    <color name="green3">#6D8C00</color>
     <color name="semi_dark">#222725</color>
     <color name="dark">#121113</color>
+
+    <color name="light_red">#F1BAA1</color>
+    <color name="semi_red">#BD613C</color>
+    <color name="dark_red">#AA1803</color>
 </resources>

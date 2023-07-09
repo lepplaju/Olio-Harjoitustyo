@@ -21,28 +21,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Home" />
+            android:text="Home"
+            style="@style/CustomButtonStyle2"/>
 
         <Button
             android:id="@+id/trainBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Train" />
+            android:text="Train"
+            style="@style/CustomButtonStyle2"/>
 
         <Button
             android:id="@+id/battleBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Battle" />
+            android:text="Battle"
+            style="@style/CustomButtonStyle2"/>
 
         <Button
             android:id="@+id/deadBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Graveyard" />
+            android:text="Graveyard"
+            style="@style/CustomButtonStyle2"/>
     </LinearLayout>
 
     <FrameLayout

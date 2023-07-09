@@ -2,6 +2,7 @@ package com.example.lutemon.classes;
 
 public class Lutemon {
     private static int STARTING_LEVEL = 5;
+    private String location;
     private int level;
     private String name;
     private String type;
@@ -89,6 +90,13 @@ public class Lutemon {
     public int getHealth() {
         return health;
     }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
 }
-
-
