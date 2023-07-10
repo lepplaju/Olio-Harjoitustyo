@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/listLutemonsBtn" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/battleBtn"
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
@@ -54,5 +54,16 @@
         app:layout_constraintEnd_toEndOf="@+id/addLutemonBtn"
         app:layout_constraintStart_toStartOf="@+id/addLutemonBtn"
         app:layout_constraintTop_toBottomOf="@+id/moveLutemonsBtn" />
+
+    <Button
+        android:id="@+id/saveBtn"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="200dp"
+        android:onClick="saveGameState"
+        android:text="Save Lutemons"
+        app:layout_constraintEnd_toEndOf="@+id/battleBtn"
+        app:layout_constraintStart_toStartOf="@+id/battleBtn"
+        app:layout_constraintTop_toBottomOf="@+id/battleBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

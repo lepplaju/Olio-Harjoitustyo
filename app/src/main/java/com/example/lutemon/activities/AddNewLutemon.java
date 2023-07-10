@@ -10,8 +10,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.lutemon.R;
+import com.example.lutemon.classes.GameFile;
 import com.example.lutemon.classes.Home;
 import com.example.lutemon.classes.Lutemon;
+import com.example.lutemon.classes.SaveFileManager;
 import com.example.lutemon.uniqueLutemonTypes.FireLutemon;
 import com.example.lutemon.uniqueLutemonTypes.GrassLutemon;
 import com.example.lutemon.uniqueLutemonTypes.WaterLutemon;
@@ -19,7 +21,8 @@ import com.example.lutemon.uniqueLutemonTypes.WaterLutemon;
 public class AddNewLutemon extends AppCompatActivity {
 
     private RadioGroup lutemonTypesGroup;
-    private Home storage;
+    private SaveFileManager saveFileManager;
+    private GameFile gameFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +55,12 @@ public class AddNewLutemon extends AppCompatActivity {
                 break;
         }
 
+        saveFileManager = SaveFileManager.getInstance();
+        gameFile = saveFileManager.getGameFile();
+        Home home = gameFile.getHome();
+        home.createLutemon(lutemonToAdd);
 
-        storage = Home.getInstance();
-        storage.createLutemon(lutemonToAdd);
-
-        storage.listLutemons();
+        home.listLutemons();
 
         Intent intent = new Intent(AddNewLutemon.this, MainActivity.class);
         startActivity(intent);

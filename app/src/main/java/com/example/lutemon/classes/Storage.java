@@ -2,9 +2,10 @@ package com.example.lutemon.classes;
 
 import com.example.lutemon.adaptersAndHelpers.LutemonViewHelper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Storage {
+public class Storage implements Serializable {
     protected String name;
     protected ArrayList<Lutemon> lutemons;
 

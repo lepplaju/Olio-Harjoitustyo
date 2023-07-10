@@ -1,6 +1,8 @@
 package com.example.lutemon.classes;
 
-public class Inventory extends Storage{
+import java.io.Serializable;
+
+public class Inventory extends Storage implements Serializable {
     private static Inventory inventory;
     private Inventory(){
         super();

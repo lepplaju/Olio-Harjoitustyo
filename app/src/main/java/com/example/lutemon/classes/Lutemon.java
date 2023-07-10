@@ -1,6 +1,8 @@
 package com.example.lutemon.classes;
 
-public class Lutemon {
+import java.io.Serializable;
+
+public class Lutemon implements Serializable {
     private static int STARTING_LEVEL = 5;
     private String location;
     private int level;

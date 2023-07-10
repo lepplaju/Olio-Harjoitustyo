@@ -1,8 +1,9 @@
 package com.example.lutemon.classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Home extends Storage{
+public class Home extends Storage implements Serializable {
     private static Home storage;
     private Home(){
         super();

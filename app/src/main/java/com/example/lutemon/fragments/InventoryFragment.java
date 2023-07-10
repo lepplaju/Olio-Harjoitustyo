@@ -12,9 +12,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.lutemon.R;
+import com.example.lutemon.classes.GameFile;
 import com.example.lutemon.classes.Home;
 import com.example.lutemon.classes.Inventory;
 import com.example.lutemon.classes.Lutemon;
+import com.example.lutemon.classes.SaveFileManager;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,8 @@ import java.util.ArrayList;
 public class InventoryFragment extends Fragment {
 
     private RadioGroup lutemonRadioGroupInventory;
+    private SaveFileManager saveFileManager;
+    private GameFile gameFile;
 
     public InventoryFragment() {
         // Required empty public constructor
@@ -49,7 +53,9 @@ public class InventoryFragment extends Fragment {
     }
 
     public void moveLutemonToHomeFunc(){
-        Inventory inventory = Inventory.getInstance();
+        saveFileManager = SaveFileManager.getInstance();
+        gameFile = saveFileManager.getGameFile();
+        Inventory inventory = gameFile.getInventory();
         ArrayList<Lutemon> lutemonsInInventory = inventory.getLutemons();
         int id = lutemonRadioGroupInventory.getCheckedRadioButtonId();
         if (id != -1) {
@@ -63,8 +69,11 @@ public class InventoryFragment extends Fragment {
     }
 
     public void makeRadioButtons(){
+        saveFileManager = SaveFileManager.getInstance();
+        gameFile = saveFileManager.getGameFile();
+        Inventory inventory = gameFile.getInventory();
         lutemonRadioGroupInventory.removeAllViews();
-        ArrayList<Lutemon> lutemonsInInventory = Inventory.getInstance().getLutemons();
+        ArrayList<Lutemon> lutemonsInInventory = inventory.getLutemons();
 
         if (lutemonsInInventory != null) {
             for (Lutemon lutemon : lutemonsInInventory) {

@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.lutemon.R;
+import com.example.lutemon.classes.SaveFileManager;
 
 public class MainActivity extends AppCompatActivity {
 
+    private SaveFileManager saveFileManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,5 +31,10 @@ public class MainActivity extends AppCompatActivity {
     public void moveLutemonsView(View view){
         Intent intent = new Intent(MainActivity.this, MoveLutemons.class);
         startActivity(intent);
+    }
+
+    public void saveGameState(View view){
+        saveFileManager = SaveFileManager.getInstance();
+        saveFileManager.saveFile(MainActivity.this);
     }
 }

@@ -13,13 +13,17 @@ import android.widget.RadioGroup;
 
 import com.example.lutemon.R;
 import com.example.lutemon.adaptersAndHelpers.LutemonListAdapter;
+import com.example.lutemon.classes.GameFile;
 import com.example.lutemon.classes.Home;
 import com.example.lutemon.classes.Lutemon;
+import com.example.lutemon.classes.SaveFileManager;
 
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
     private RadioGroup lutemonRadioGroup;
+    private SaveFileManager saveFileManager;
+    private GameFile gameFile;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -48,7 +52,9 @@ public class HomeFragment extends Fragment {
     }
 
     public void moveLutemonToInvent() {
-        Home home = Home.getInstance();
+        saveFileManager = SaveFileManager.getInstance();
+        gameFile = saveFileManager.getGameFile();
+        Home home = gameFile.getHome();
         ArrayList<Lutemon> lutemonsInHome = home.getLutemons();
         int id = lutemonRadioGroup.getCheckedRadioButtonId();
         if (id != -1) {
@@ -63,8 +69,11 @@ public class HomeFragment extends Fragment {
     }
 
     private void makeRadioButtons() {
+        saveFileManager = SaveFileManager.getInstance();
+        gameFile = saveFileManager.getGameFile();
+        Home home = gameFile.getHome();
         lutemonRadioGroup.removeAllViews();
-        ArrayList<Lutemon> lutemonsInHome = Home.getInstance().getLutemons();
+        ArrayList<Lutemon> lutemonsInHome = home.getLutemons();
         if (lutemonsInHome != null) {
             for (Lutemon lutemon : lutemonsInHome) {
                 RadioButton rb = new RadioButton(getContext());
