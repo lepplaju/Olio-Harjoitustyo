@@ -21,7 +21,9 @@ public class Home extends Storage implements Serializable {
     }
 
     public void moveLutemonToInventory(Lutemon lutemon){
-        Inventory inventory = Inventory.getInstance();
+        SaveFileManager saveFileManager = SaveFileManager.getInstance();
+        GameFile gameFile = saveFileManager.getGameFile();
+        Inventory inventory = gameFile.getInventory();
         lutemon.setLocation("Inventory");
         inventory.addLutemon(lutemon);
         lutemons.remove(lutemon);
