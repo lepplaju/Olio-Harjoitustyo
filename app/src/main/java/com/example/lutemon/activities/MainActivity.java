@@ -33,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void battleView(View view){
+        Intent intent = new Intent(MainActivity.this, BattlePage.class);
+        startActivity(intent);
+    }
     public void saveGameState(View view){
         saveFileManager = SaveFileManager.getInstance();
         saveFileManager.saveFile(MainActivity.this);

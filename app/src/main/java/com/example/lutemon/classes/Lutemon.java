@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Lutemon implements Serializable {
     private static int STARTING_LEVEL = 5;
+    private int image;
     private String location;
     private int level;
     private String name;

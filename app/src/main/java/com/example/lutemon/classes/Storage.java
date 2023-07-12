@@ -19,7 +19,7 @@ public class Storage implements Serializable {
     }
 
     public Lutemon getLutemon(int id) {
-        return null;
+        return lutemons.get(id);
     }
 
     public void listLutemons() {
