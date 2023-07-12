@@ -1,7 +1,6 @@
 package com.example.lutemon.classes;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Home extends Storage implements Serializable {
     private static Home storage;
@@ -16,7 +15,7 @@ public class Home extends Storage implements Serializable {
     }
 
     public void createLutemon(Lutemon lutemon){
-        lutemon.setLocation("Home");
+        lutemon.setStorageLocation("Home");
         lutemons.add(lutemon);
     }
 
@@ -24,7 +23,7 @@ public class Home extends Storage implements Serializable {
         SaveFileManager saveFileManager = SaveFileManager.getInstance();
         GameFile gameFile = saveFileManager.getGameFile();
         Inventory inventory = gameFile.getInventory();
-        lutemon.setLocation("Inventory");
+        lutemon.setStorageLocation("Inventory");
         inventory.addLutemon(lutemon);
         lutemons.remove(lutemon);
 

@@ -1,11 +1,14 @@
 package com.example.lutemon.classes;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Lutemon implements Serializable {
     private static int STARTING_LEVEL = 5;
+    private static int NUM_OF_MOVES = 4;
     private int image;
-    private String location;
+    private ArrayList<Move> moves;
+    private String storageLocation;
     private int level;
     private String name;
     private String type;
@@ -21,6 +24,7 @@ public class Lutemon implements Serializable {
         this.type = type;
         this.name = name;
         this.level = STARTING_LEVEL;
+        this.moves = defaultMoves();
     }
 
     public Lutemon(String type, String name, int attack, int defence, int maxHp, int exp) {
@@ -31,14 +35,45 @@ public class Lutemon implements Serializable {
         this.maxHealth = maxHp;
         this.health = maxHp;
         this.experience = exp;
+        this.moves = defaultMoves();
+    }
+
+    public ArrayList<Move> defaultMoves() {
+        ArrayList<Move> generatedMoves = new ArrayList<>();
+        Move move1 = new Move("Punch", 5, 99);
+        Move move2 = new Move("Kick", 10, 80);
+        Move move3 = new Move("Hype-up", -1, 100);
+        Move move4 = new Move("TypeSpecific", 6, 99);
+        generatedMoves.add(move1);
+        generatedMoves.add(move2);
+        generatedMoves.add(move3);
+        generatedMoves.add(move4);
+
+        return generatedMoves;
     }
 
     public void defence(Lutemon lutemon) {
 
     }
 
-    public int attack() {
-        return 0;
+    public void attack(Lutemon enemyLutemon, int attackId)
+    {
+        int baseDmg = moves.get(attackId).getBaseDmg();
+        //TODO: make calculations from stats and take in to account move accuracy
+        enemyLutemon.takeDamage(baseDmg);
+    }
+
+    public void takeDamage(int damage){
+        this.health -= damage;
+    }
+
+    public void addMove(Move move) {
+        if (moves.size() > NUM_OF_MOVES) {
+            moves.add(move);
+        } else {
+            moves.set(NUM_OF_MOVES, move);
+        }
+
     }
 
     public int getNumberOfCreatedLutemons() {
@@ -51,6 +86,10 @@ public class Lutemon implements Serializable {
 
     public int getSpeed() {
         return speed;
+    }
+
+    public ArrayList<Move> getMoves() {
+        return moves;
     }
 
     public void setSpeed(int speed) {
@@ -94,12 +133,20 @@ public class Lutemon implements Serializable {
         return health;
     }
 
-    public String getLocation() {
-        return location;
+    public String getStorageLocation() {
+        return storageLocation;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setStorageLocation(String storageLocation) {
+        this.storageLocation = storageLocation;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
+    }
+
+    public int getImage() {
+        return image;
     }
 
 }
