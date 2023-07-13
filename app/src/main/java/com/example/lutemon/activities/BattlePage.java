@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,15 +19,21 @@ import com.example.lutemon.classes.Move;
 import com.example.lutemon.classes.SaveFileManager;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class BattlePage extends AppCompatActivity {
 
+    private boolean buttonsAreVisible = true;
+    private boolean enemyIsAlive = true;
     private Enemy enemy;
     Lutemon enemyLutemon;
     Lutemon userLutemon;
 
     ArrayList<Move> userMoves;
 
+    private TextView userLutemonHp;
+    private TextView userLutemonName;
+    private ImageView userImage;
     private Inventory inventory;
 
     private Button move1Btn;
@@ -58,9 +65,9 @@ public class BattlePage extends AppCompatActivity {
 
         enemyLutemonHp = findViewById(R.id.enemyHpTxt);
         enemyLutemonName = findViewById(R.id.enemyLutemonTxtView);
-        TextView userLutemonName = findViewById(R.id.userLutemonTxtView);
-        TextView userLutemonHp = findViewById(R.id.userHpTxt);
-        ImageView userImage = findViewById(R.id.userImage);
+        userLutemonName = findViewById(R.id.userLutemonTxtView);
+        userLutemonHp = findViewById(R.id.userHpTxt);
+        userImage = findViewById(R.id.userImage);
         enemyImage = findViewById(R.id.enemyImage);
 
         enemyImage.setImageResource(R.drawable.enemymonster1);
@@ -95,25 +102,63 @@ public class BattlePage extends AppCompatActivity {
         public void onClick(View view) {
             int viewId = view.getId();
             if (viewId == R.id.move1Btn) {
-                userLutemon.attack(enemyLutemon,0);
+                userLutemon.attack(enemyLutemon, 0);
             } else if (viewId == R.id.move2Btn) {
                 userLutemon.attack(enemyLutemon, 1);
             } else if (viewId == R.id.move3Btn) {
-                userLutemon.attack(enemyLutemon,2);
+                userLutemon.attack(enemyLutemon, 2);
             } else if (viewId == R.id.move4Btn) {
-                userLutemon.attack(enemyLutemon,3);
+                userLutemon.attack(enemyLutemon, 3);
             }
+            disableButtons();
             enemyLutemonHp.setText(enemyLutemon.getHealth() + "/" + enemyLutemon.getMaxHealth());
 
-            if(enemyLutemon.getHealth() <= 0){
+            if (enemyLutemon.getHealth() <= 0) {
+                enemyIsAlive = false;
                 destroyEnemyLutemon();
             }
+            if (enemyIsAlive) {
+                Random random = new Random();
+                int attackId = random.nextInt(4);
+                enemyLutemon.attack(userLutemon, attackId);
+                userLutemonHp.setText(userLutemon.getHealth() + "/" + userLutemon.getMaxHealth());
+            }
+            if(userLutemon.getHealth() <= 0){
+                destroyUserLutemon();
+            }
+
         }
     };
 
-    public void destroyEnemyLutemon(){
+    public void destroyEnemyLutemon() {
         enemyImage.setImageResource(0);
         enemyLutemonName.setText("");
         enemyLutemonHp.setText("");
+    }
+
+    public void destroyUserLutemon() {
+        userImage.setImageResource(0);
+        userLutemonName.setText("");
+        userLutemonHp.setText("");
+    }
+
+    public void disableButtons() {
+        buttonsAreVisible = false;
+        move1Btn.setVisibility(View.GONE);
+        move2Btn.setVisibility(View.GONE);
+        move3Btn.setVisibility(View.GONE);
+        move4Btn.setVisibility(View.GONE);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                buttonsAreVisible = true;
+                move1Btn.setVisibility(View.VISIBLE);
+                move2Btn.setVisibility(View.VISIBLE);
+                move3Btn.setVisibility(View.VISIBLE);
+                move4Btn.setVisibility(View.VISIBLE);
+            }
+        }, 5000);
+
     }
 }
