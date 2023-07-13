@@ -34,6 +34,8 @@ public class BattlePage extends AppCompatActivity {
     private Button move3Btn;
     private Button move4Btn;
     private TextView enemyLutemonHp;
+    private ImageView enemyImage;
+    private TextView enemyLutemonName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +57,11 @@ public class BattlePage extends AppCompatActivity {
         userLutemon = inventory.getLutemon(0);
 
         enemyLutemonHp = findViewById(R.id.enemyHpTxt);
-        TextView enemyLutemonName = findViewById(R.id.enemyLutemonTxtView);
+        enemyLutemonName = findViewById(R.id.enemyLutemonTxtView);
         TextView userLutemonName = findViewById(R.id.userLutemonTxtView);
         TextView userLutemonHp = findViewById(R.id.userHpTxt);
         ImageView userImage = findViewById(R.id.userImage);
-        ImageView enemyImage = findViewById(R.id.enemyImage);
+        enemyImage = findViewById(R.id.enemyImage);
 
         enemyImage.setImageResource(R.drawable.enemymonster1);
         userImage.setImageResource(userLutemon.getImage());
@@ -102,6 +104,16 @@ public class BattlePage extends AppCompatActivity {
                 userLutemon.attack(enemyLutemon,3);
             }
             enemyLutemonHp.setText(enemyLutemon.getHealth() + "/" + enemyLutemon.getMaxHealth());
+
+            if(enemyLutemon.getHealth() <= 0){
+                destroyEnemyLutemon();
+            }
         }
     };
+
+    public void destroyEnemyLutemon(){
+        enemyImage.setImageResource(0);
+        enemyLutemonName.setText("");
+        enemyLutemonHp.setText("");
+    }
 }
