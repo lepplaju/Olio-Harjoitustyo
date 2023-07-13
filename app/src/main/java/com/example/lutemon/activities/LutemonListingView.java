@@ -10,7 +10,13 @@ import com.example.lutemon.R;
 import com.example.lutemon.adaptersAndHelpers.LutemonListAdapter;
 import com.example.lutemon.classes.GameFile;
 import com.example.lutemon.classes.Home;
+import com.example.lutemon.classes.Inventory;
+import com.example.lutemon.classes.Lutemon;
 import com.example.lutemon.classes.SaveFileManager;
+
+import java.util.ArrayList;
+
+import kotlin.comparisons.UComparisonsKt;
 
 public class LutemonListingView extends AppCompatActivity {
     private SaveFileManager saveFileManager;
@@ -23,10 +29,14 @@ public class LutemonListingView extends AppCompatActivity {
 
         saveFileManager = SaveFileManager.getInstance();
         gameFile = saveFileManager.getGameFile();
+        Inventory inventory = gameFile.getInventory();
         Home home = gameFile.getHome();
+        ArrayList<Lutemon> combinedList = new ArrayList<>();
+        combinedList.addAll(home.getLutemons());
+        combinedList.addAll(inventory.getLutemons());
         recyclerView = findViewById(R.id.listingsRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new LutemonListAdapter(getApplicationContext(),home.getLutemons()));
+        recyclerView.setAdapter(new LutemonListAdapter(getApplicationContext(), combinedList));
 
     }
 }

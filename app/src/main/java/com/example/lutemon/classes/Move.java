@@ -1,6 +1,8 @@
 package com.example.lutemon.classes;
 
-public class Move {
+import java.io.Serializable;
+
+public class Move implements Serializable {
     private String name;
     private int baseDmg;
     private int accuracy;
