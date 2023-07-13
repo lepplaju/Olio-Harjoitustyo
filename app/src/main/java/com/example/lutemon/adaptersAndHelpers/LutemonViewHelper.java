@@ -1,6 +1,7 @@
 package com.example.lutemon.adaptersAndHelpers;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,15 +11,18 @@ import com.example.lutemon.R;
 
 public class LutemonViewHelper extends RecyclerView.ViewHolder {
 
-    TextView information, strength, defence, hitpoints, exp,location;
+    TextView name, type, strength, defence, hitpoints, exp,location;
+    ImageView image;
 
     public  LutemonViewHelper(@NonNull View itemView){
         super(itemView);
-        information = itemView.findViewById(R.id.uniqueinfotvholder);
+        name = itemView.findViewById(R.id.nametvholder);
+        type = itemView.findViewById(R.id.typetvholder);
         strength = itemView.findViewById(R.id.strengthtvholder);
         defence = itemView.findViewById(R.id.defencetvholder);
         hitpoints = itemView.findViewById(R.id.hitpointstvholder);
         exp = itemView.findViewById(R.id.exptvholder);
         location = itemView.findViewById(R.id.locationtvholder);
+        image = itemView.findViewById(R.id.imageholder);
     }
 }

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="180dp"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -9,51 +11,75 @@
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
         android:background="@color/light_red"
-        android:orientation="vertical"
-        android:padding="5dp">
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:weightSum="2">
 
-        <TextView
-            android:id="@+id/uniqueinfotvholder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="information"
-            style="@style/ListingTextViewStyle"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/light_red"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/locationtvholder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Storage location"
-            style="@style/ListingTextViewStyle"/>
+            <TextView
+                android:id="@+id/nametvholder"
+                style="@style/ListingTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name" />
 
-        <TextView
-            android:id="@+id/strengthtvholder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Strength"
-            style="@style/ListingTextViewStyle"></TextView>
+            <TextView
+                android:id="@+id/typetvholder"
+                style="@style/ListingTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Type" />
 
-        <TextView
-            android:id="@+id/defencetvholder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Defence"
-            style="@style/ListingTextViewStyle"></TextView>
+            <TextView
+                android:id="@+id/locationtvholder"
+                style="@style/ListingTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Storage location" />
 
-        <TextView
-            android:id="@+id/hitpointstvholder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hitpoints"
-            style="@style/ListingTextViewStyle"></TextView>
+            <TextView
+                android:id="@+id/strengthtvholder"
+                style="@style/ListingTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Strength"></TextView>
 
-        <TextView
-            android:id="@+id/exptvholder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="exp"
-            style="@style/ListingTextViewStyle"></TextView>
+            <TextView
+                android:id="@+id/defencetvholder"
+                style="@style/ListingTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Defence"></TextView>
 
+            <TextView
+                android:id="@+id/hitpointstvholder"
+                style="@style/ListingTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hitpoints"></TextView>
+
+            <TextView
+                android:id="@+id/exptvholder"
+                style="@style/ListingTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="exp"></TextView>
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageholder"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:srcCompat="@tools:sample/avatars" />
 
     </LinearLayout>
 

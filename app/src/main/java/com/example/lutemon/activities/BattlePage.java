@@ -278,4 +278,8 @@ public class BattlePage extends AppCompatActivity {
         userLutemonName.setText("");
         userLutemonHp.setText("");
     }
+
+    @Override
+    public void onBackPressed() {
+    }
 }

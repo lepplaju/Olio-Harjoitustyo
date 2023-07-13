@@ -53,4 +53,8 @@ public class MoveLutemons extends AppCompatActivity {
 
         }
     };
+
+    public void cancelBtn(View view) {
+        super.onBackPressed();
+    }
 }

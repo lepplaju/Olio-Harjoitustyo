@@ -65,4 +65,8 @@ public class AddNewLutemon extends AppCompatActivity {
         Intent intent = new Intent(AddNewLutemon.this, MainActivity.class);
         startActivity(intent);
     }
+
+    public void cancelBtn(View view) {
+        super.onBackPressed();
+    }
 }

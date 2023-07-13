@@ -33,7 +33,8 @@ public class LutemonListAdapter extends RecyclerView.Adapter<LutemonViewHelper> 
     @Override
     public void onBindViewHolder(@NonNull LutemonViewHelper holder, int position){
         Lutemon lutemon = lutemons.get(position);
-        holder.information.setText(lutemon.getName().toString()  + " : " +  lutemon.getType().toString());
+        holder.name.setText("Name: " + lutemon.getName().toString());
+        holder.type.setText("Type: " + lutemon.getType().toString());
         // In order to get storage location in bold text, it needs to be in html type:
         //String locationBold = "Location: <b>" + lutemon.getStorageLocation() + "</b>";
         holder.location.setText("Location: " + lutemon.getStorageLocation());
@@ -41,6 +42,7 @@ public class LutemonListAdapter extends RecyclerView.Adapter<LutemonViewHelper> 
         holder.defence.setText("Defence: " + String.valueOf(lutemon.getDefence()));
         holder.exp.setText("exp: " + String.valueOf(lutemon.getExperience()));
         holder.hitpoints.setText("HP: " + String.valueOf(lutemon.getHealth()) + "/" +lutemon.getMaxHealth());
+        holder.image.setImageResource(lutemon.getImage());
 
     }
     @Override

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.lutemon.R;
 import com.example.lutemon.adaptersAndHelpers.LutemonListAdapter;
@@ -38,5 +39,8 @@ public class LutemonListingView extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new LutemonListAdapter(getApplicationContext(), combinedList));
 
+    }
+        public void cancelBtn(View view) {
+        super.onBackPressed();
     }
 }
