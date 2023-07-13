@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.lutemon.R;
@@ -45,6 +46,8 @@ public class BattlePage extends AppCompatActivity {
     private TextView enemyLutemonHp;
     private ImageView enemyImage;
     private TextView enemyLutemonName;
+    private ProgressBar enemyHealthBar;
+    private ProgressBar userHealthBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,8 @@ public class BattlePage extends AppCompatActivity {
         enemyLutemon = enemy.getLutemons().get(0);
         userLutemon = inventory.getLutemon(0);
 
+        enemyHealthBar = findViewById(R.id.enemyHealthBar);
+        userHealthBar = findViewById(R.id.userHealthBar);
         enemyLutemonHp = findViewById(R.id.enemyHpTxt);
         enemyLutemonName = findViewById(R.id.enemyLutemonTxtView);
         userLutemonName = findViewById(R.id.userLutemonTxtView);
@@ -75,12 +80,16 @@ public class BattlePage extends AppCompatActivity {
         enemyImage.setImageResource(R.drawable.enemymonster1);
         userImage.setImageResource(userLutemon.getImage());
 
+        enemyHealthBar.setMax(enemyLutemon.getMaxHealth());
+        enemyHealthBar.setProgress(enemyLutemon.getHealth());
+        userHealthBar.setMax(userLutemon.getMaxHealth());
+        userHealthBar.setProgress(userLutemon.getHealth());
         enemyLutemonHp.setText(enemyLutemon.getHealth() + "/" + enemyLutemon.getMaxHealth());
         enemyLutemonName.setText(enemyLutemon.getName());
         userLutemonHp.setText(userLutemon.getHealth() + "/" + userLutemon.getMaxHealth());
         userLutemonName.setText(userLutemon.getName());
-
     }
+
 
     private void setButtons() {
         userMoves = userLutemon.getMoves();
@@ -195,6 +204,7 @@ public class BattlePage extends AppCompatActivity {
 
     private void damageVisuals() {
         enemyLutemonHp.setText(enemyLutemon.getHealth() + "/" + enemyLutemon.getMaxHealth());
+        enemyHealthBar.setProgress(enemyLutemon.getHealth());
         if (enemyLutemon.getHealth() <= 0) {
             enemyLutemonIsAlive = false;
             new Handler().postDelayed(new Runnable() {
@@ -232,6 +242,7 @@ public class BattlePage extends AppCompatActivity {
                             int attackId = random.nextInt(4);
                             enemyLutemon.attack(userLutemon, attackId);
                             userLutemonHp.setText(userLutemon.getHealth() + "/" + userLutemon.getMaxHealth());
+                            userHealthBar.setProgress(userLutemon.getHealth());
                         }
                     }, 600);
                 }
@@ -270,6 +281,7 @@ public class BattlePage extends AppCompatActivity {
         enemyImage.setImageResource(0);
         enemyLutemonName.setText("");
         enemyLutemonHp.setText("");
+        enemyHealthBar.setVisibility(View.GONE);
     }
 
     public void destroyUserLutemon() {
@@ -277,6 +289,7 @@ public class BattlePage extends AppCompatActivity {
         userImage.setImageResource(0);
         userLutemonName.setText("");
         userLutemonHp.setText("");
+        userHealthBar.setVisibility(View.GONE);
     }
 
     @Override

@@ -7,24 +7,23 @@
     tools:context=".activities.BattlePage">
 
     <TextView
-        android:id="@+id/userLutemonTxtView"
+        android:id="@+id/enemyHpTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/userImage"
-        app:layout_constraintStart_toStartOf="@+id/userImage"
-        app:layout_constraintTop_toBottomOf="@+id/userImage" />
+        app:layout_constraintEnd_toEndOf="@+id/enemyImage"
+        app:layout_constraintStart_toStartOf="@+id/enemyImage"
+        app:layout_constraintTop_toBottomOf="@+id/enemyLutemonTxtView" />
 
     <TextView
         android:id="@+id/enemyLutemonTxtView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/enemyImage"
         app:layout_constraintStart_toStartOf="@+id/enemyImage"
-        app:layout_constraintTop_toBottomOf="@+id/enemyImage" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/userImage"
@@ -40,31 +39,29 @@
         android:id="@+id/enemyImage"
         android:layout_width="125dp"
         android:layout_height="125dp"
-        android:layout_marginTop="52dp"
         android:layout_marginEnd="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enemyHealthBar"
         tools:src="@drawable/ic_launcher_background" />
-
-    <TextView
-        android:id="@+id/enemyHpTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/enemyImage"
-        app:layout_constraintEnd_toEndOf="@+id/enemyImage"
-        app:layout_constraintStart_toStartOf="@+id/enemyImage" />
 
     <TextView
         android:id="@+id/userHpTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/userImage"
         app:layout_constraintEnd_toEndOf="@+id/userImage"
-        app:layout_constraintStart_toStartOf="@+id/userImage" />
+        app:layout_constraintHorizontal_bias=".5"
+        app:layout_constraintStart_toStartOf="@+id/userImage"
+        app:layout_constraintTop_toBottomOf="@+id/userLutemonTxtView" />
+
+    <TextView
+        android:id="@+id/userLutemonTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/userImage"
+        app:layout_constraintStart_toStartOf="@+id/userImage"
+        app:layout_constraintTop_toBottomOf="@+id/userImage" />
 
     <Button
         android:id="@+id/move3Btn"
@@ -105,4 +102,24 @@
         app:layout_constraintBottom_toTopOf="@+id/move4Btn"
         app:layout_constraintEnd_toEndOf="@+id/move4Btn"
         app:layout_constraintStart_toStartOf="@+id/move4Btn" />
+
+    <ProgressBar
+        android:id="@+id/enemyHealthBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:scaleY="3"
+        app:layout_constraintEnd_toEndOf="@+id/enemyLutemonTxtView"
+        app:layout_constraintStart_toStartOf="@+id/enemyLutemonTxtView"
+        app:layout_constraintTop_toBottomOf="@+id/enemyHpTxt" />
+
+    <ProgressBar
+        android:id="@+id/userHealthBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:scaleY="3"
+        app:layout_constraintEnd_toEndOf="@+id/userLutemonTxtView"
+        app:layout_constraintStart_toStartOf="@+id/userLutemonTxtView"
+        app:layout_constraintTop_toBottomOf="@+id/userHpTxt" />
 </androidx.constraintlayout.widget.ConstraintLayout>
