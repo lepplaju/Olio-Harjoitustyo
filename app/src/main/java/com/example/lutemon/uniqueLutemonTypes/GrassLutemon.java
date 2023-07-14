@@ -18,6 +18,5 @@ public class GrassLutemon extends Lutemon {
         setSpeed(random.nextInt(max-min+1) + min);
         setMaxHealth(random.nextInt(max-min+1) + min);
         setImage(R.drawable.grassmonster);
-
     }
 }

@@ -24,7 +24,7 @@ public class Lutemon implements Serializable {
         this.type = type;
         this.name = name;
         this.level = STARTING_LEVEL;
-        this.moves = defaultMoves();
+        this.moves = setDefaultMoves();
     }
 
     public Lutemon(String type, String name, int attack, int defence, int maxHp, int exp) {
@@ -35,35 +35,21 @@ public class Lutemon implements Serializable {
         this.maxHealth = maxHp;
         this.health = maxHp;
         this.experience = exp;
-        this.moves = defaultMoves();
+        this.moves = setDefaultMoves();
     }
 
-    public ArrayList<Move> defaultMoves() {
-        ArrayList<Move> generatedMoves = new ArrayList<>();
-        Move move1 = new Move("Punch", 5, 99);
-        Move move2 = new Move("Kick", 10, 80);
-        Move move3 = new Move("Hype-up", -1, 100);
-        Move move4 = new Move("TypeSpecific", 6, 99);
-        generatedMoves.add(move1);
-        generatedMoves.add(move2);
-        generatedMoves.add(move3);
-        generatedMoves.add(move4);
-
-        return generatedMoves;
-    }
 
     public void defence(Lutemon lutemon) {
 
     }
 
-    public void attack(Lutemon enemyLutemon, int attackId)
-    {
-        int baseDmg = moves.get(attackId).getBaseDmg();
+    public void attack(Lutemon attackerLutemon, Lutemon targetLutemon, Move move) {
+        int baseDmg = move.calculateDmg(attackerLutemon.getAttack(), targetLutemon.getDefence(), move.getAccuracy(), 1);
         //TODO: make calculations from stats and take in to account move accuracy
-        enemyLutemon.takeDamage(baseDmg);
+        targetLutemon.takeDamage(baseDmg);
     }
 
-    public void takeDamage(int damage){
+    public void takeDamage(int damage) {
         this.health -= damage;
     }
 
@@ -149,4 +135,31 @@ public class Lutemon implements Serializable {
         return image;
     }
 
+    public ArrayList<Move> setDefaultMoves() {
+        ArrayList<Move> generatedMoves = new ArrayList<>();
+        Move move1 = new Move("Punch", 5, 90);
+        Move move2 = new Move("Kick", 9, 80);
+        Move move3 = new Move("Hype-up", 0, 100);
+        Move move4 = new Move("TypeSpecific", 6, 90);
+        generatedMoves.add(move1);
+        generatedMoves.add(move2);
+        generatedMoves.add(move3);
+        generatedMoves.add(move4);
+
+        return generatedMoves;
+    }
+
+    public ArrayList<Move> setEnemyDefaultMoves() {
+        ArrayList<Move> generatedMoves = new ArrayList<>();
+        Move move1 = new Move("Tackle", 4, 90);
+        Move move2 = new Move("Body-slam", 8, 80);
+        Move move3 = new Move("Rage", 0, 100);
+        Move move4 = new Move("TypeSpecific", 5, 90);
+        generatedMoves.add(move1);
+        generatedMoves.add(move2);
+        generatedMoves.add(move3);
+        generatedMoves.add(move4);
+
+        return generatedMoves;
+    }
 }

@@ -113,13 +113,13 @@ public class BattlePage extends AppCompatActivity {
         public void onClick(View view) {
             int viewId = view.getId();
             if (viewId == R.id.move1Btn) {
-                userLutemon.attack(enemyLutemon, 0);
+                userLutemon.attack(userLutemon,enemyLutemon, userMoves.get(0));
             } else if (viewId == R.id.move2Btn) {
-                userLutemon.attack(enemyLutemon, 1);
+                userLutemon.attack(userLutemon,enemyLutemon, userMoves.get(1));
             } else if (viewId == R.id.move3Btn) {
-                userLutemon.attack(enemyLutemon, 2);
+                userLutemon.attack(userLutemon,enemyLutemon, userMoves.get(2));
             } else if (viewId == R.id.move4Btn) {
-                userLutemon.attack(enemyLutemon, 3);
+                userLutemon.attack(userLutemon,enemyLutemon, userMoves.get(3));
             }
             userAnimation();
             disableButtons();
@@ -240,7 +240,7 @@ public class BattlePage extends AppCompatActivity {
                         public void run() {
                             Random random = new Random();
                             int attackId = random.nextInt(4);
-                            enemyLutemon.attack(userLutemon, attackId);
+                            enemyLutemon.attack(enemyLutemon, userLutemon, enemyLutemon.getMoves().get(attackId));
                             userLutemonHp.setText(userLutemon.getHealth() + "/" + userLutemon.getMaxHealth());
                             userHealthBar.setProgress(userLutemon.getHealth());
                         }
