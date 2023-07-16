@@ -63,45 +63,79 @@
         app:layout_constraintStart_toStartOf="@+id/userImage"
         app:layout_constraintTop_toBottomOf="@+id/userImage" />
 
-    <Button
-        android:id="@+id/move3Btn"
-        android:layout_width="150dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="20dp"
-        android:text="Button"
+    <FrameLayout
+        android:id="@+id/frameContainer"
+        android:layout_width="match_parent"
+        android:layout_height="200sp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <Button
-        android:id="@+id/move4Btn"
-        android:layout_width="150dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="20dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="@+id/move3Btn"
-        app:layout_constraintStart_toEndOf="@+id/move3Btn"
-        app:layout_constraintTop_toTopOf="@+id/move3Btn" />
+        <LinearLayout
+            android:id="@+id/buttonContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/move1Btn"
-        android:layout_width="150dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="20dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/move3Btn"
-        app:layout_constraintEnd_toEndOf="@+id/move3Btn"
-        app:layout_constraintStart_toStartOf="@+id/move3Btn" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/move2Btn"
-        android:layout_width="150dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="20dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/move4Btn"
-        app:layout_constraintEnd_toEndOf="@+id/move4Btn"
-        app:layout_constraintStart_toStartOf="@+id/move4Btn" />
+                <Button
+                    android:id="@+id/move4Btn"
+                    android:layout_width="0dp"
+                    android:layout_height="80sp"
+                    android:layout_margin="3sp"
+                    android:layout_weight="1"
+                    android:text="Button" />
+
+                <Button
+                    android:id="@+id/move1Btn"
+                    android:layout_width="0dp"
+                    android:layout_height="80sp"
+                    android:layout_margin="3sp"
+                    android:layout_weight="1"
+                    android:text="Button" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/move3Btn"
+                    android:layout_width="0dp"
+                    android:layout_height="80sp"
+                    android:layout_margin="3sp"
+                    android:layout_weight="1"
+                    android:text="Button" />
+
+                <Button
+                    android:id="@+id/move2Btn"
+                    android:layout_width="0dp"
+                    android:layout_height="80sp"
+                    android:layout_margin="3sp"
+                    android:layout_weight="1"
+                    android:text="Button" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textToReplaceButtons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/semi_light"
+            android:gravity="center"
+            android:text="Text Box"
+            android:textColor="@color/semi_dark"
+            android:visibility="invisible"
+            android:layout_margin="5sp"/>
+    </FrameLayout>
 
     <ProgressBar
         android:id="@+id/enemyHealthBar"

@@ -8,11 +8,15 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.lutemon.R;
+import com.example.lutemon.adaptersAndHelpers.ChatboxController;
+import com.example.lutemon.adaptersAndHelpers.DamageResult;
 import com.example.lutemon.classes.Enemy;
 import com.example.lutemon.classes.GameFile;
 import com.example.lutemon.classes.Inventory;
@@ -48,12 +52,18 @@ public class BattlePage extends AppCompatActivity {
     private TextView enemyLutemonName;
     private ProgressBar enemyHealthBar;
     private ProgressBar userHealthBar;
+    private FrameLayout bottomScreenFrame;
+    private LinearLayout buttonContainer;
+    private TextView chatboxText;
+
+    private ChatboxController chatboxController;
+    private DamageResult userDmgResult;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle_page);
-
 
         SaveFileManager saveFileManager = SaveFileManager.getInstance();
         GameFile gameFile = saveFileManager.getGameFile();
@@ -61,7 +71,7 @@ public class BattlePage extends AppCompatActivity {
         enemy = new Enemy("Enemy", 1, 1);
         setFields();
         setButtons();
-
+        setChatBox();
     }
 
     private void setFields() {
@@ -108,21 +118,29 @@ public class BattlePage extends AppCompatActivity {
         move4Btn.setOnClickListener(listener);
     }
 
+    private void setChatBox() {
+        bottomScreenFrame = findViewById(R.id.frameContainer);
+        chatboxText = findViewById(R.id.textToReplaceButtons);
+        buttonContainer = findViewById(R.id.buttonContainer);
+        chatboxController = new ChatboxController(bottomScreenFrame, buttonContainer, chatboxText, move1Btn, move2Btn, move3Btn, move4Btn);
+    }
+
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             int viewId = view.getId();
             if (viewId == R.id.move1Btn) {
-                userLutemon.attack(userLutemon,enemyLutemon, userMoves.get(0));
+                userDmgResult = userLutemon.attack(userLutemon, enemyLutemon, userMoves.get(0));
             } else if (viewId == R.id.move2Btn) {
-                userLutemon.attack(userLutemon,enemyLutemon, userMoves.get(1));
+                userDmgResult = userLutemon.attack(userLutemon, enemyLutemon, userMoves.get(1));
             } else if (viewId == R.id.move3Btn) {
-                userLutemon.attack(userLutemon,enemyLutemon, userMoves.get(2));
+                userDmgResult = userLutemon.attack(userLutemon, enemyLutemon, userMoves.get(2));
             } else if (viewId == R.id.move4Btn) {
-                userLutemon.attack(userLutemon,enemyLutemon, userMoves.get(3));
+                userDmgResult = userLutemon.attack(userLutemon, enemyLutemon, userMoves.get(3));
             }
+            chatboxController.showTextBox();
             userAnimation();
-            disableButtons();
+            //disableButtons();
 
         }
     };
@@ -138,11 +156,13 @@ public class BattlePage extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                buttonsAreVisible = true;
-                move1Btn.setVisibility(View.VISIBLE);
-                move2Btn.setVisibility(View.VISIBLE);
-                move3Btn.setVisibility(View.VISIBLE);
-                move4Btn.setVisibility(View.VISIBLE);
+                if (userLutemonIsAlive) {
+                    buttonsAreVisible = true;
+                    move1Btn.setVisibility(View.VISIBLE);
+                    move2Btn.setVisibility(View.VISIBLE);
+                    move3Btn.setVisibility(View.VISIBLE);
+                    move4Btn.setVisibility(View.VISIBLE);
+                }
             }
         }, 2500);
 
@@ -202,19 +222,6 @@ public class BattlePage extends AppCompatActivity {
         userImage.startAnimation(attackAnimation);
     }
 
-    private void damageVisuals() {
-        enemyLutemonHp.setText(enemyLutemon.getHealth() + "/" + enemyLutemon.getMaxHealth());
-        enemyHealthBar.setProgress(enemyLutemon.getHealth());
-        if (enemyLutemon.getHealth() <= 0) {
-            enemyLutemonIsAlive = false;
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    destroyEnemyLutemon();
-                }
-            }, 600);
-        }
-    }
 
     private void enemyAnimation() {
         int[] userLocation = new int[2];
@@ -234,29 +241,17 @@ public class BattlePage extends AppCompatActivity {
         enemyAttackAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                if (enemyLutemonIsAlive) {
+                if (userLutemonIsAlive) {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            Random random = new Random();
-                            int attackId = random.nextInt(4);
-                            enemyLutemon.attack(enemyLutemon, userLutemon, enemyLutemon.getMoves().get(attackId));
-                            userLutemonHp.setText(userLutemon.getHealth() + "/" + userLutemon.getMaxHealth());
-                            userHealthBar.setProgress(userLutemon.getHealth());
-                        }
-                    }, 600);
-                }
-
-                if (userLutemon.getHealth() <= 0) {
-                    userLutemonIsAlive = false;
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            destroyUserLutemon();
+                            enemyDamageVisuals();
                         }
                     }, 200);
 
                 }
+
+
             }
 
             @Override
@@ -282,17 +277,77 @@ public class BattlePage extends AppCompatActivity {
         enemyLutemonName.setText("");
         enemyLutemonHp.setText("");
         enemyHealthBar.setVisibility(View.GONE);
+        chatboxController.setChatBoxText(enemyLutemon.getName() + " Fainted");
     }
 
     public void destroyUserLutemon() {
-
         userImage.setImageResource(0);
+        chatboxController.setChatBoxText(userLutemon.getName() + " Fainted");
         userLutemonName.setText("");
         userLutemonHp.setText("");
         userHealthBar.setVisibility(View.GONE);
     }
 
+
     @Override
     public void onBackPressed() {
+        // This method overrides what happens when user presses the back button in a phone navigation bar.
+    }
+
+    private void damageVisuals() {
+        if (userDmgResult.isHit()) {
+            chatboxController.setChatBoxText(userLutemon.getName() + " used " + userDmgResult.getMoveName());
+            if (userDmgResult.isCriticalHit()) {
+                chatboxController.appendChatBoxText(" Critical hit! ");
+            }
+            if (!userDmgResult.getEffectiveness().equals("Normal")) {
+                chatboxController.appendChatBoxText(userDmgResult.getEffectiveness());
+            }
+        } else if (!userDmgResult.isHit()) {
+            chatboxController.setChatBoxText(userLutemon.getName() + " used " + userDmgResult.getMoveName() + " and it missed");
+        }
+        enemyLutemonHp.setText(enemyLutemon.getHealth() + "/" + enemyLutemon.getMaxHealth());
+        enemyHealthBar.setProgress(enemyLutemon.getHealth());
+        if (enemyLutemon.getHealth() <= 0) {
+            enemyLutemonIsAlive = false;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    destroyEnemyLutemon();
+                }
+            }, 600);
+        }
+    }
+
+    private void enemyDamageVisuals() {
+        Random random = new Random();
+        int attackId = random.nextInt(4);
+        DamageResult enemyDmgResult = enemyLutemon.attack(enemyLutemon, userLutemon, enemyLutemon.getMoves().get(attackId));
+
+        if (enemyDmgResult.isHit()) {
+            chatboxController.setChatBoxText(enemyLutemon.getName() + " used " + enemyDmgResult.getMoveName());
+            if (enemyDmgResult.isCriticalHit()) {
+                chatboxController.appendChatBoxText(" Critical hit! ");
+            }
+            if (!enemyDmgResult.getEffectiveness().equals("Normal")) {
+                chatboxController.appendChatBoxText(enemyDmgResult.getEffectiveness());
+            }
+        }
+        if (enemyDmgResult.isHit() == false) {
+            chatboxController.setChatBoxText(enemyLutemon.getName() + " used " + enemyDmgResult.getMoveName() + " and it missed");
+            return;
+        }
+        userLutemonHp.setText(userLutemon.getHealth() + "/" + userLutemon.getMaxHealth());
+        userHealthBar.setProgress(userLutemon.getHealth());
+        if (userLutemon.getHealth() <= 0) {
+            userLutemonIsAlive = false;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    destroyUserLutemon();
+                }
+            }, 600);
+        }
+
     }
 }

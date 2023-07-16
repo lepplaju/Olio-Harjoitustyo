@@ -1,5 +1,7 @@
 package com.example.lutemon.classes;
 
+import com.example.lutemon.adaptersAndHelpers.DamageResult;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -43,10 +45,10 @@ public class Lutemon implements Serializable {
 
     }
 
-    public void attack(Lutemon attackerLutemon, Lutemon targetLutemon, Move move) {
-        int baseDmg = move.calculateDmg(attackerLutemon.getAttack(), targetLutemon.getDefence(), move.getAccuracy(), 1);
-        //TODO: make calculations from stats and take in to account move accuracy
-        targetLutemon.takeDamage(baseDmg);
+    public DamageResult attack(Lutemon attackerLutemon, Lutemon targetLutemon, Move move) {
+        DamageResult dmgCalculation = move.calculateDmg(attackerLutemon.getAttack(), targetLutemon.getDefence(), move.getAccuracy(), 1);
+        targetLutemon.takeDamage(dmgCalculation.getDamage());
+        return dmgCalculation;
     }
 
     public void takeDamage(int damage) {
@@ -145,7 +147,7 @@ public class Lutemon implements Serializable {
         generatedMoves.add(move2);
         generatedMoves.add(move3);
         generatedMoves.add(move4);
-
+        this.moves = generatedMoves;
         return generatedMoves;
     }
 
@@ -159,7 +161,7 @@ public class Lutemon implements Serializable {
         generatedMoves.add(move2);
         generatedMoves.add(move3);
         generatedMoves.add(move4);
-
+        this.moves = generatedMoves;
         return generatedMoves;
     }
 }

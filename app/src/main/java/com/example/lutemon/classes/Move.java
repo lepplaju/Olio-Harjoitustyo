@@ -1,5 +1,7 @@
 package com.example.lutemon.classes;
 
+import com.example.lutemon.adaptersAndHelpers.DamageResult;
+
 import java.io.Serializable;
 import java.util.Random;
 
@@ -28,24 +30,29 @@ public class Move implements Serializable {
 
     // In this method we calculate the damage a certain move causes.
     // Takes in to account things such as critical strikes, type effectiveness, attacker's attack stat and target's defence stat.
-    public int calculateDmg(int attackStat, int targetDefence, int accuracy, int effectiveness) {
+    public DamageResult calculateDmg(int attackStat, int targetDefence, int accuracy, int effectiveness) {
+        DamageResult dmgResult = new DamageResult();
+        dmgResult.setMoveName(getName());
+        if (!isAttackSuccessful(accuracy)) {
+            return dmgResult;
+        }
+        dmgResult.setHit(true);
         double criticalHitMultiplier = 1.5;
-        int dmg = (int) ((attackStat * baseDmg) / targetDefence);
-
+        int dmg = (int) ((attackStat * this.baseDmg) / targetDefence);
         if (isCriticalHit()) {
             dmg *= criticalHitMultiplier;
+            dmgResult.setCriticalHit(true);
         }
+        dmgResult.setEffectiveness(effectiveness);
         dmg *= effectiveness;
 
-        if (isAttackSuccessful(accuracy)) {
-            return dmg;
-        }
 
-        return 0; // Attack misses
+        dmgResult.setDamage(dmg);
+        return dmgResult;
 
     }
 
-// Calculate the chance of a criticalHit (int @criticalChance tells the odd (percentage) of hitting the critical strike)
+    // Calculate the chance of a criticalHit (int @criticalChance tells the odd (percentage) of hitting the critical strike)
     private boolean isCriticalHit() {
         int criticalChance = 2;
         int randomNumber = new Random().nextInt(101);
@@ -53,7 +60,7 @@ public class Move implements Serializable {
     }
 
     // With accuracy of 100, an attack never fails. This one also uses percentages to calculate the odds.
-    private boolean isAttackSuccessful(int accuracy){
+    private boolean isAttackSuccessful(int accuracy) {
         int randomNumber = new Random().nextInt(101);
         return randomNumber <= accuracy;
     }
