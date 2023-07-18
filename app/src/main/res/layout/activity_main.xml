@@ -49,7 +49,7 @@
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
-        android:onClick="battleView"
+        android:onClick="showBattlePopup"
         android:text="Battle!"
         app:cornerRadius="5dp"
         app:layout_constraintEnd_toEndOf="@+id/addLutemonBtn"

@@ -121,6 +121,14 @@ public class Lutemon implements Serializable {
         return health;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
     public String getStorageLocation() {
         return storageLocation;
     }
@@ -142,7 +150,7 @@ public class Lutemon implements Serializable {
         Move move1 = new Move("Punch", 5, 90);
         Move move2 = new Move("Kick", 9, 80);
         Move move3 = new Move("Hype-up", 0, 100);
-        Move move4 = new Move("TypeSpecific", 6, 90);
+        Move move4 = new Move(this.getType() + " blast", 6, 90);
         generatedMoves.add(move1);
         generatedMoves.add(move2);
         generatedMoves.add(move3);
@@ -156,12 +164,24 @@ public class Lutemon implements Serializable {
         Move move1 = new Move("Tackle", 4, 90);
         Move move2 = new Move("Body-slam", 8, 80);
         Move move3 = new Move("Rage", 0, 100);
-        Move move4 = new Move("TypeSpecific", 5, 90);
+        Move move4 = new Move(this.getType() + " blast", 5, 90);
         generatedMoves.add(move1);
         generatedMoves.add(move2);
         generatedMoves.add(move3);
         generatedMoves.add(move4);
         this.moves = generatedMoves;
         return generatedMoves;
+    }
+
+    public int addExp(Lutemon enemyLutemon, Enemy enemy) {
+        int baseExp = 10;
+        baseExp *= enemyLutemon.getLevel();
+        if (enemy.isTrainer()) {
+            baseExp *= 2;
+        }
+        baseExp += enemyLutemon.getMaxHealth()/2;
+
+        this.experience += baseExp;
+        return baseExp;
     }
 }

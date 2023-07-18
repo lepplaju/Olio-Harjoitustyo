@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Enemy {
+    private boolean isTrainer;
     private String name;
     private double difficultyMultiplier;
     private ArrayList<Lutemon> lutemons;
@@ -30,6 +31,10 @@ public class Enemy {
         return generatedLutemons;
     }
 
+    public boolean isTrainer() {
+        return isTrainer;
+    }
+
     public Lutemon makeEnemy(String name) {
         Lutemon lutemon = new Lutemon("Normal", name);
         lutemon.setEnemyDefaultMoves();
@@ -40,7 +45,7 @@ public class Enemy {
         lutemon.setAttack(random.nextInt(max - min + 1) + min);
         lutemon.setDefence(random.nextInt(max - min + 1) + min);
         lutemon.setSpeed(random.nextInt(max - min + 1) + min);
-        lutemon.setMaxHealth(random.nextInt(max - min + 1) + 50);
+        lutemon.setMaxHealth(random.nextInt(max - min + 1));
         lutemon.setImage(R.drawable.enemymonster1);
 
         return lutemon;

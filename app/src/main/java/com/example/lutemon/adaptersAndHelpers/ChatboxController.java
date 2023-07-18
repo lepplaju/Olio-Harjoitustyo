@@ -43,7 +43,7 @@ public class ChatboxController {
         handler.postDelayed(showButtonsRunnable, TEMPORARY_TEXT_DURATION);
     }
 
-    private void hideButtons() {
+    public void hideButtons() {
         button1.setVisibility(View.GONE);
         button2.setVisibility(View.GONE);
         button3.setVisibility(View.GONE);

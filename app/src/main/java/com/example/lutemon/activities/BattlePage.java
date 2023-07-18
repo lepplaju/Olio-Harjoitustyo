@@ -2,6 +2,7 @@ package com.example.lutemon.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -47,6 +48,8 @@ public class BattlePage extends AppCompatActivity {
     private Button move2Btn;
     private Button move3Btn;
     private Button move4Btn;
+
+    private Button exitBtn;
     private TextView enemyLutemonHp;
     private ImageView enemyImage;
     private TextView enemyLutemonName;
@@ -137,6 +140,12 @@ public class BattlePage extends AppCompatActivity {
                 userDmgResult = userLutemon.attack(userLutemon, enemyLutemon, userMoves.get(2));
             } else if (viewId == R.id.move4Btn) {
                 userDmgResult = userLutemon.attack(userLutemon, enemyLutemon, userMoves.get(3));
+            } else if (viewId == R.id.exitBtn) {
+                if (!enemyLutemonIsAlive) {
+                    Intent intent = new Intent(BattlePage.this, MainActivity.class);
+                    startActivity(intent);
+                }
+
             }
             chatboxController.showTextBox();
             userAnimation();
@@ -278,6 +287,16 @@ public class BattlePage extends AppCompatActivity {
         enemyLutemonHp.setText("");
         enemyHealthBar.setVisibility(View.GONE);
         chatboxController.setChatBoxText(enemyLutemon.getName() + " Fainted");
+        chatboxController.releaseResources();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                endLevel();
+            }
+        }, 3000);
+
+
     }
 
     public void destroyUserLutemon() {
@@ -291,7 +310,7 @@ public class BattlePage extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // This method overrides what happens when user presses the back button in a phone navigation bar.
+        // This method is here to override the back button in a phone navigation bar.
     }
 
     private void damageVisuals() {
@@ -301,7 +320,7 @@ public class BattlePage extends AppCompatActivity {
                 chatboxController.appendChatBoxText(" Critical hit! ");
             }
             if (!userDmgResult.getEffectiveness().equals("Normal")) {
-                chatboxController.appendChatBoxText(userDmgResult.getEffectiveness());
+                chatboxController.appendChatBoxText(" it was " + userDmgResult.getEffectiveness() + " effective");
             }
         } else if (!userDmgResult.isHit()) {
             chatboxController.setChatBoxText(userLutemon.getName() + " used " + userDmgResult.getMoveName() + " and it missed");
@@ -348,6 +367,24 @@ public class BattlePage extends AppCompatActivity {
                 }
             }, 600);
         }
+
+    }
+
+    public void endLevel() {
+        chatboxController.hideButtons();
+        int gainedExp = userLutemon.addExp(enemyLutemon, enemy);
+        chatboxController.setChatBoxText(userLutemon.getName() + " gained " + gainedExp + " experience points");
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                activateMainMenuBtn();
+            }
+        }, 3000);
+    }
+
+    public void activateMainMenuBtn() {
+        exitBtn.setVisibility(View.VISIBLE);
 
     }
 }
