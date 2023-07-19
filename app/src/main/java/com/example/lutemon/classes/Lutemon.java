@@ -1,5 +1,8 @@
 package com.example.lutemon.classes;
 
+import android.os.Handler;
+
+import com.example.lutemon.adaptersAndHelpers.ChatboxController;
 import com.example.lutemon.adaptersAndHelpers.DamageResult;
 
 import java.io.Serializable;
@@ -17,6 +20,7 @@ public class Lutemon implements Serializable {
     private int attack = 1;
     private int defence = 1;
     private int experience = 1;
+    private int expToLevel = 10;
     private int health = 1;
     private int speed = 0;
     private int maxHealth = 1;
@@ -179,9 +183,34 @@ public class Lutemon implements Serializable {
         if (enemy.isTrainer()) {
             baseExp *= 2;
         }
-        baseExp += enemyLutemon.getMaxHealth()/2;
+        baseExp += enemyLutemon.getMaxHealth() / 2;
 
         this.experience += baseExp;
         return baseExp;
+    }
+
+    public void checkLevelUp(ChatboxController controller) {
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                if (expToLevel < experience) {
+                    level++;
+                    controller.setChatBoxText(name + " Levelled up to level " + getLevel() + "!");
+                    controller.setLutemonLevelTV(getName() + " : level " + getLevel());
+                    experience = experience - expToLevel;
+                    expToLevel = (level - STARTING_LEVEL) * 10;
+                    if (expToLevel < experience) {
+                        checkLevelUp(controller);
+                    } else {
+                        controller.showExitBtn();
+                    }
+                } else {
+                    controller.showExitBtn();
+                }
+            }
+        }, 1000);
+
     }
 }

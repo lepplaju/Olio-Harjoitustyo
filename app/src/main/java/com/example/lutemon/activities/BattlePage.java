@@ -98,9 +98,9 @@ public class BattlePage extends AppCompatActivity {
         userHealthBar.setMax(userLutemon.getMaxHealth());
         userHealthBar.setProgress(userLutemon.getHealth());
         enemyLutemonHp.setText(enemyLutemon.getHealth() + "/" + enemyLutemon.getMaxHealth());
-        enemyLutemonName.setText(enemyLutemon.getName());
+        enemyLutemonName.setText(enemyLutemon.getName() + " : level " + enemyLutemon.getLevel());
         userLutemonHp.setText(userLutemon.getHealth() + "/" + userLutemon.getMaxHealth());
-        userLutemonName.setText(userLutemon.getName());
+        userLutemonName.setText(userLutemon.getName() + " : level " + userLutemon.getLevel());
     }
 
 
@@ -110,6 +110,7 @@ public class BattlePage extends AppCompatActivity {
         move2Btn = findViewById(R.id.move2Btn);
         move3Btn = findViewById(R.id.move3Btn);
         move4Btn = findViewById(R.id.move4Btn);
+        exitBtn = findViewById(R.id.exitBtn);
 
         move1Btn.setText(String.valueOf(userMoves.get(0).getName()));
         move2Btn.setText(String.valueOf(userMoves.get(1).getName()));
@@ -119,13 +120,15 @@ public class BattlePage extends AppCompatActivity {
         move2Btn.setOnClickListener(listener);
         move3Btn.setOnClickListener(listener);
         move4Btn.setOnClickListener(listener);
+        exitBtn.setOnClickListener(listener);
+        exitBtn.setVisibility(View.GONE);
     }
 
     private void setChatBox() {
         bottomScreenFrame = findViewById(R.id.frameContainer);
         chatboxText = findViewById(R.id.textToReplaceButtons);
         buttonContainer = findViewById(R.id.buttonContainer);
-        chatboxController = new ChatboxController(bottomScreenFrame, buttonContainer, chatboxText, move1Btn, move2Btn, move3Btn, move4Btn);
+        chatboxController = new ChatboxController(bottomScreenFrame, buttonContainer, chatboxText, userLutemonName, move1Btn, move2Btn, move3Btn, move4Btn, exitBtn);
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -141,14 +144,12 @@ public class BattlePage extends AppCompatActivity {
             } else if (viewId == R.id.move4Btn) {
                 userDmgResult = userLutemon.attack(userLutemon, enemyLutemon, userMoves.get(3));
             } else if (viewId == R.id.exitBtn) {
-                if (!enemyLutemonIsAlive) {
-                    Intent intent = new Intent(BattlePage.this, MainActivity.class);
-                    startActivity(intent);
-                }
-
+                Intent intent = new Intent(BattlePage.this, MainActivity.class);
+                startActivity(intent);
             }
             chatboxController.showTextBox();
-            userAnimation();
+
+            if (enemyLutemonIsAlive) userAnimation();
             //disableButtons();
 
         }
@@ -378,13 +379,10 @@ public class BattlePage extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                activateMainMenuBtn();
+                userLutemon.checkLevelUp(chatboxController);
+
             }
-        }, 3000);
+        }, 2000);
     }
 
-    public void activateMainMenuBtn() {
-        exitBtn.setVisibility(View.VISIBLE);
-
-    }
 }

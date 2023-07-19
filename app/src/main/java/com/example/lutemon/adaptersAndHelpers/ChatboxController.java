@@ -12,8 +12,8 @@ import android.widget.TextView;
 public class ChatboxController {
     private FrameLayout container;
     private LinearLayout buttonLayout;
-    private TextView temporaryTextView;
-    private Button button1, button2, button3, button4;
+    private TextView temporaryTextView, userLutemonTV;
+    private Button button1, button2, button3, button4, exitBtn;
     private boolean buttonsAreVisible = true;
     private static final long TEMPORARY_TEXT_DURATION = 3000; // Duration in milliseconds
 
@@ -25,8 +25,8 @@ public class ChatboxController {
         }
     };
 
-    public ChatboxController(FrameLayout container, LinearLayout buttonLayout, TextView temporaryTextView,
-                             Button button1, Button button2, Button button3, Button button4) {
+    public ChatboxController(FrameLayout container, LinearLayout buttonLayout, TextView temporaryTextView, TextView userLutemonTV,
+                             Button button1, Button button2, Button button3, Button button4, Button exitBtn) {
         this.container = container;
         this.buttonLayout = buttonLayout;
         this.temporaryTextView = temporaryTextView;
@@ -34,6 +34,8 @@ public class ChatboxController {
         this.button2 = button2;
         this.button3 = button3;
         this.button4 = button4;
+        this.exitBtn = exitBtn;
+        this.userLutemonTV = userLutemonTV;
     }
 
     public void showTextBox() {
@@ -61,12 +63,16 @@ public class ChatboxController {
 
     }
 
-    public void setChatAttackMissed() {
-        temporaryTextView.setText("Attack missed");
+    public void showExitBtn() {
+        exitBtn.setVisibility(View.VISIBLE);
     }
 
     public void setChatBoxText(String infoString) {
         temporaryTextView.setText(infoString);
+    }
+
+    public void setLutemonLevelTV(String text){
+    userLutemonTV.setText(text);
     }
 
     public void appendChatBoxText(String infoString) {
