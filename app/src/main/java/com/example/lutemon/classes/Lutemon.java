@@ -68,10 +68,6 @@ public class Lutemon implements Serializable {
 
     }
 
-    public int getNumberOfCreatedLutemons() {
-        return 0;
-    }
-
     public String getType() {
         return type;
     }

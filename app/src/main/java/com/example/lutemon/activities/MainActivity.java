@@ -47,23 +47,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showBattlePopup(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Check Inventory")
-                .setMessage("Continue with your inventory?")
-                .setPositiveButton("BATTLE", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        battleView();
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+        if (saveFileManager.getGameFile().getInventory().getNumberOfLutemons()  < 1 ) {
 
-        AlertDialog dialog = builder.create();
-        dialog.show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("No Lutemons in inventory!")
+                    .setMessage("Added Lutemons have to be moved from storage to inventory in order to battle with them.")
+                    .setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        } else{
+        battleView();
+        }
     }
 }

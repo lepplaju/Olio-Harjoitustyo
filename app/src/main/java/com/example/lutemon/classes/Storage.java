@@ -32,5 +32,10 @@ public class Storage implements Serializable {
         return lutemons;
     }
 
+    public int getNumberOfLutemons() {
+
+        return lutemons.size();
+    }
+
 
 }
