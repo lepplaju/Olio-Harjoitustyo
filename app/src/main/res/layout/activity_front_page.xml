@@ -22,7 +22,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:onClick="makeNewFile"
+        android:onClick="showNewFilePopup"
         android:text="Make new file"
         app:layout_constraintEnd_toEndOf="@+id/loadExistingFileBtn"
         app:layout_constraintStart_toStartOf="@+id/loadExistingFileBtn"

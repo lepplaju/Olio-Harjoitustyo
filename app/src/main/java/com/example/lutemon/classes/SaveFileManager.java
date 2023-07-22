@@ -33,7 +33,7 @@ public class SaveFileManager {
 
     }
 
-    public void loadFile(Context context) {
+    public void loadFile(Context context) throws IOException{
         try {
             instance = SaveFileManager.getInstance();
             gameFile = instance.getGameFile();
@@ -52,12 +52,15 @@ public class SaveFileManager {
         } catch (FileNotFoundException e) {
             System.out.println("Tiedoston lukemisessa tapahtui virhe!");
             e.printStackTrace();
+            throw new IOException();
         } catch (IOException e) {
             System.out.println("Tiedoston lukemisessa tapahtui virhe!");
             e.printStackTrace();
+            throw new IOException();
         } catch (ClassNotFoundException e) {
             System.out.println("Tiedoston lukemisessa tapahtui virhe!");
             e.printStackTrace();
+            throw new IOException();
         }
     }
 

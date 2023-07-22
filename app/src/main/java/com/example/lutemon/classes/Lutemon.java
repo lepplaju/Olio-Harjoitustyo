@@ -189,6 +189,7 @@ public class Lutemon implements Serializable {
         return baseExp;
     }
 
+
     public void checkLevelUp(ChatboxController controller) {
 
         new Handler().postDelayed(new Runnable() {
