@@ -32,9 +32,9 @@ public class MoveLutemons extends AppCompatActivity {
         fragmentGraveyardController.setOnClickListener(listener);
 
         if (savedInstanceState == null) {
-            fragmentInventoryController.setBackgroundColor(getColor(R.color.inactiveButton_color));
-            fragmentGraveyardController.setBackgroundColor(getColor(R.color.inactiveButton_color));
-            fragmentHomeController.setBackgroundColor(getColor(R.color.activeButton_color));
+            fragmentInventoryController.setBackgroundColor(getColor(R.color.normalButton_color));
+            fragmentGraveyardController.setBackgroundColor(getColor(R.color.normalButton_color));
+            fragmentHomeController.setBackgroundColor(getColor(R.color.pressedButton_color));
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frameContainer, new HomeFragment())
                     .commit();
@@ -45,19 +45,19 @@ public class MoveLutemons extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            fragmentHomeController.setBackgroundColor(getColor(R.color.inactiveButton_color));
-            fragmentInventoryController.setBackgroundColor(getColor(R.color.inactiveButton_color));
-            fragmentGraveyardController.setBackgroundColor(getColor(R.color.inactiveButton_color));
+            fragmentHomeController.setBackgroundColor(getColor(R.color.normalButton_color));
+            fragmentInventoryController.setBackgroundColor(getColor(R.color.normalButton_color));
+            fragmentGraveyardController.setBackgroundColor(getColor(R.color.normalButton_color));
             Fragment fragment = null;
 
             if (view.getId() == R.id.homeBtn) {
-                fragmentHomeController.setBackgroundColor(getColor(R.color.activeButton_color));
+                fragmentHomeController.setBackgroundColor(getColor(R.color.pressedButton_color));
                 fragment = new HomeFragment();
             } else if (view.getId() == R.id.inventoryBtn) {
-                fragmentInventoryController.setBackgroundColor(getColor(R.color.activeButton_color));
+                fragmentInventoryController.setBackgroundColor(getColor(R.color.pressedButton_color));
                 fragment = new InventoryFragment();
             } else if (view.getId() == R.id.deadBtn) {
-                fragmentGraveyardController.setBackgroundColor(getColor(R.color.activeButton_color));
+                fragmentGraveyardController.setBackgroundColor(getColor(R.color.pressedButton_color));
                 fragment = new GraveyardFragment();
             }
 

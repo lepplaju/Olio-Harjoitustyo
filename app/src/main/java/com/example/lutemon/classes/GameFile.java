@@ -6,6 +6,7 @@ public class GameFile implements Serializable {
 
     private static GameFile gameFile;
     private String fileName;
+    private int highestLevelAvailable;
     private Inventory inventory;
     private Home home;
 
@@ -18,6 +19,7 @@ public class GameFile implements Serializable {
     private GameFile(){
         this.inventory = Inventory.getInstance();
         this.home = Home.getInstance();
+        this.highestLevelAvailable = 1;
     }
 
     public Inventory getInventory() {
@@ -29,4 +31,11 @@ public class GameFile implements Serializable {
         return home;
     }
 
+    public int getHighestLevelAvailable() {
+        return highestLevelAvailable;
+    }
+
+    public void setHighestLevelAvailable(int highestLevelAvailable) {
+        this.highestLevelAvailable = highestLevelAvailable;
+    }
 }

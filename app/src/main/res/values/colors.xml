@@ -7,8 +7,9 @@
     <color name="light">#f7f7f2</color>
     <color name="semi_light">#e4e6c3</color>
     <color name="green1">#899878</color>
-    <color name="inactiveButton_color">#BCAF4D</color>
-    <color name="activeButton_color">#6D8C00</color>
+    <color name="normalButton_color">#BCAF4D</color>
+    <color name="pressedButton_color">#6D8C00</color>
+    <color name="disabledButton_color">#424242</color>
     <color name="semi_dark">#222725</color>
     <color name="dark">#121113</color>
 

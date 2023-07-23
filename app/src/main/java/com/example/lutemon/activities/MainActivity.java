@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void battleView() {
-        Intent intent = new Intent(MainActivity.this, BattlePage.class);
+    public void levelSelect() {
+        Intent intent = new Intent(MainActivity.this, LevelSelect.class);
         startActivity(intent);
     }
 
@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showBattlePopup(View view) {
-        if (saveFileManager.getGameFile().getInventory().getNumberOfLutemons()  < 1 ) {
-
+        saveFileManager = SaveFileManager.getInstance();
+        if (saveFileManager.getGameFile().getInventory().getNumberOfLutemons() < 1) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("No Lutemons in inventory!")
                     .setMessage("Added Lutemons have to be moved from storage to inventory in order to battle with them.")
@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
             AlertDialog dialog = builder.create();
             dialog.show();
-        } else{
-        battleView();
+        } else {
+            levelSelect();
         }
     }
 }
