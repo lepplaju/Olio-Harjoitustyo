@@ -20,7 +20,7 @@ public class Inventory extends Storage implements Serializable {
         SaveFileManager saveFileManager = SaveFileManager.getInstance();
         GameFile gameFile = saveFileManager.getGameFile();
         Home home = gameFile.getHome();
-        lutemon.setStorageLocation("Home");
+        lutemon.setStorageLocation("Storage");
         home.addLutemon(lutemon);
         lutemons.remove(lutemon);
     }

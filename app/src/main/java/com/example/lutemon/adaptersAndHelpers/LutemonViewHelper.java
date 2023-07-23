@@ -11,17 +11,15 @@ import com.example.lutemon.R;
 
 public class LutemonViewHelper extends RecyclerView.ViewHolder {
 
-    TextView name, type, strength, defence, hitpoints, exp,location;
+    TextView name, type, level, defence, hitpoints, exp,location;
     ImageView image;
 
     public  LutemonViewHelper(@NonNull View itemView){
         super(itemView);
         name = itemView.findViewById(R.id.nametvholder);
         type = itemView.findViewById(R.id.typetvholder);
-        strength = itemView.findViewById(R.id.strengthtvholder);
-        defence = itemView.findViewById(R.id.defencetvholder);
+        level = itemView.findViewById(R.id.leveltvholder);
         hitpoints = itemView.findViewById(R.id.hitpointstvholder);
-        exp = itemView.findViewById(R.id.exptvholder);
         location = itemView.findViewById(R.id.locationtvholder);
         image = itemView.findViewById(R.id.imageholder);
     }

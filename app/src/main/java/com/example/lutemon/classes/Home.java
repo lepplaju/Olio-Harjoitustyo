@@ -15,7 +15,7 @@ public class Home extends Storage implements Serializable {
     }
 
     public void createLutemon(Lutemon lutemon){
-        lutemon.setStorageLocation("Home");
+        lutemon.setStorageLocation("Storage");
         lutemons.add(lutemon);
     }
 

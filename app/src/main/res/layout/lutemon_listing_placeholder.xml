@@ -30,6 +30,13 @@
                 android:text="Name" />
 
             <TextView
+                android:id="@+id/leveltvholder"
+                style="@style/ListingTextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Level"></TextView>
+
+            <TextView
                 android:id="@+id/typetvholder"
                 style="@style/ListingTextViewStyle"
                 android:layout_width="match_parent"
@@ -44,32 +51,11 @@
                 android:text="Storage location" />
 
             <TextView
-                android:id="@+id/strengthtvholder"
-                style="@style/ListingTextViewStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Strength"></TextView>
-
-            <TextView
-                android:id="@+id/defencetvholder"
-                style="@style/ListingTextViewStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Defence"></TextView>
-
-            <TextView
                 android:id="@+id/hitpointstvholder"
                 style="@style/ListingTextViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hitpoints"></TextView>
-
-            <TextView
-                android:id="@+id/exptvholder"
-                style="@style/ListingTextViewStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="exp"></TextView>
 
 
         </LinearLayout>
