@@ -31,7 +31,7 @@ public class Enemy {
         return generatedLutemons;
     }
 
-    public boolean isTrainer() {
+    public boolean getIsTrainer() {
         return isTrainer;
     }
 

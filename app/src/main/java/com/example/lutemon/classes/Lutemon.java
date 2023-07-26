@@ -176,7 +176,7 @@ public class Lutemon implements Serializable {
     public int addExp(Lutemon enemyLutemon, Enemy enemy) {
         int baseExp = 10;
         baseExp *= enemyLutemon.getLevel();
-        if (enemy.isTrainer()) {
+        if (enemy.getIsTrainer()) {
             baseExp *= 2;
         }
         baseExp += enemyLutemon.getMaxHealth() / 2;
