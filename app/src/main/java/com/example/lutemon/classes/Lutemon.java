@@ -173,6 +173,7 @@ public class Lutemon implements Serializable {
         return generatedMoves;
     }
 
+
     public int addExp(Lutemon enemyLutemon, Enemy enemy) {
         int baseExp = 10;
         baseExp *= enemyLutemon.getLevel();

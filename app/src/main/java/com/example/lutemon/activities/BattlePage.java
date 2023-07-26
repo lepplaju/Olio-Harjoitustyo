@@ -68,10 +68,13 @@ public class BattlePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle_page);
 
+        Intent intent = getIntent();
+        enemy = (Enemy)intent.getSerializableExtra("enemy");
+
         SaveFileManager saveFileManager = SaveFileManager.getInstance();
         GameFile gameFile = saveFileManager.getGameFile();
         inventory = gameFile.getInventory();
-        enemy = new Enemy("Enemy", 1, 1);
+
         setFields();
         setButtons();
         setChatBox();
