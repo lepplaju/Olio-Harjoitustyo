@@ -30,7 +30,7 @@ import java.util.Random;
 
 public class BattlePage extends AppCompatActivity {
 
-    private boolean buttonsAreVisible = true;
+    private SaveFileManager saveFileManager;
     private boolean enemyLutemonIsAlive = true;
     private boolean userLutemonIsAlive = true;
     private Enemy enemy;
@@ -69,9 +69,9 @@ public class BattlePage extends AppCompatActivity {
         setContentView(R.layout.activity_battle_page);
 
         Intent intent = getIntent();
-        enemy = (Enemy)intent.getSerializableExtra("enemy");
+        enemy = (Enemy) intent.getSerializableExtra("enemy");
 
-        SaveFileManager saveFileManager = SaveFileManager.getInstance();
+        saveFileManager = SaveFileManager.getInstance();
         GameFile gameFile = saveFileManager.getGameFile();
         inventory = gameFile.getInventory();
 
@@ -160,7 +160,6 @@ public class BattlePage extends AppCompatActivity {
 
 
     public void disableButtons() {
-        buttonsAreVisible = false;
         move1Btn.setVisibility(View.GONE);
         move2Btn.setVisibility(View.GONE);
         move3Btn.setVisibility(View.GONE);
@@ -170,7 +169,6 @@ public class BattlePage extends AppCompatActivity {
             @Override
             public void run() {
                 if (userLutemonIsAlive) {
-                    buttonsAreVisible = true;
                     move1Btn.setVisibility(View.VISIBLE);
                     move2Btn.setVisibility(View.VISIBLE);
                     move3Btn.setVisibility(View.VISIBLE);
@@ -378,6 +376,11 @@ public class BattlePage extends AppCompatActivity {
         chatboxController.hideButtons();
         int gainedExp = userLutemon.addExp(enemyLutemon, enemy);
         chatboxController.setChatBoxText(userLutemon.getName() + " gained " + gainedExp + " experience points");
+        GameFile gameFile = saveFileManager.getGameFile();
+        if (enemy.getIsTrainer() == true && gameFile.getHighestLevelAvailable()==enemy.getTrainerLevel()) {
+            gameFile.levelCompleted();
+        }
+
 
         new Handler().postDelayed(new Runnable() {
             @Override

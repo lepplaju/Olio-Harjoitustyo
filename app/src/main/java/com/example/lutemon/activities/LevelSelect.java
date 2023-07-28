@@ -17,7 +17,8 @@ import com.example.lutemon.classes.SaveFileManager;
 import java.util.ArrayList;
 
 public class LevelSelect extends AppCompatActivity {
-
+    private String[] enemyLutemonNames = {"Beastly2", "Gargoleon"};
+    private int[] enemyLutemonImages = {R.drawable.enemymonster2, R.drawable.enemymonster1};
     private GridLayout buttonsContainer;
     private SaveFileManager saveFileManager;
 
@@ -26,33 +27,32 @@ public class LevelSelect extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_select);
         buttonsContainer = findViewById(R.id.gridLayout);
-        //Button backBtn = findViewById(R.id.exitBtn);
+        Button backBtn = findViewById(R.id.gobackBtn);
+        Button trainBtn = findViewById(R.id.TrainBtn);
+        backBtn.setOnClickListener(listener);
+        trainBtn.setOnClickListener(listener);
         lockButtons();
     }
 
     public void goTrain() {
+        Lutemon lutemonInInventory = saveFileManager.getGameFile().getInventory().getLutemon(0);
+        Enemy enemy = new Enemy("training", 1, false);
+        ArrayList<Lutemon> enemyLuts = new ArrayList<>();
+        Lutemon lut = enemy.createEnemyLutemon("Booo", lutemonInInventory.getLevel() / 2, "Normal", R.drawable.enemymonster2);
+        enemyLuts.add(lut);
+        enemy.setLutemons(enemyLuts);
+
         Intent intent = new Intent(this, BattlePage.class);
+        intent.putExtra("enemy", enemy);
         startActivity(intent);
     }
 
     private void lockButtons() {
         saveFileManager = SaveFileManager.getInstance();
-        int levelsCompleted = saveFileManager.getGameFile().getHighestLevelAvailable();
+        int highestLevelAvailable = saveFileManager.getGameFile().getHighestLevelAvailable();
         int count = buttonsContainer.getChildCount();
 
-        for (int j = 0; j < levelsCompleted; j++) {
-            View child = buttonsContainer.getChildAt(j);
-            if (child instanceof Button) {
-                Button button = (Button) child;
-                button.setOnClickListener(listener);
-                button.setBackgroundResource(R.color.normalButton_color);
-                button.setEnabled(true);
-            }
-
-        }
-
-
-        for (int i = levelsCompleted; i < count; i++) {
+        for (int i = highestLevelAvailable; i < count; i++) {
             View child = buttonsContainer.getChildAt(i);
             if (child instanceof Button) {
                 Button button = (Button) child;
@@ -60,32 +60,47 @@ public class LevelSelect extends AppCompatActivity {
                 button.setEnabled(false);
             }
         }
+        for (int j = 0; j < highestLevelAvailable; j++) {
+            View child = buttonsContainer.getChildAt(j);
+            if (child instanceof Button) {
+                Button button = (Button) child;
+
+                button.setBackgroundResource(R.color.normalButton_color);
+                button.setEnabled(true);
+                button.setOnClickListener(listener);
+            }
+
+        }
     }
 
     public void cancelFunc() {
         super.onBackPressed();
     }
 
-    public void selectLevel(int levelNum) {
-    }
 
     private View.OnClickListener listener = new View.OnClickListener() {
 
         @Override
         public void onClick(View view) {
             Enemy enemy;
-            ArrayList<Lutemon> enemyLuts = new ArrayList<>();
-            Intent intent = new Intent(LevelSelect.this, BattlePage.class);
+
             if (view.getId() == R.id.level1) {
-                enemy = new Enemy("Boss", 2, true);
-                Lutemon lut = enemy.createEnemyLutemon("Normal", 1, "Normal", R.drawable.enemymonster2);
-                enemyLuts.add(lut);
-                enemy.setLutemons(enemyLuts);
+                Intent intent = new Intent(LevelSelect.this, BattlePage.class);
+                enemy = makeNewEnemy(1);
                 intent.putExtra("enemy", enemy);
+                startActivity(intent);
             }
             if (view.getId() == R.id.level2) {
+                Intent intent = new Intent(LevelSelect.this, BattlePage.class);
+                enemy = makeNewEnemy(2);
+                intent.putExtra("enemy", enemy);
+                startActivity(intent);
             }
             if (view.getId() == R.id.level3) {
+                Intent intent = new Intent(LevelSelect.this, BattlePage.class);
+                enemy = makeNewEnemy(3);
+                intent.putExtra("enemy", enemy);
+                startActivity(intent);
             }
             if (view.getId() == R.id.level4) {
             }
@@ -119,10 +134,20 @@ public class LevelSelect extends AppCompatActivity {
             if (view.getId() == R.id.TrainBtn) {
                 goTrain();
             }
-            startActivity(intent);
+
 
         }
 
 
     };
+
+    public Enemy makeNewEnemy(int level) {
+        ArrayList<Lutemon> enemyLuts = new ArrayList<>();
+        Enemy enemy = new Enemy("Boss", 2, true, level);
+        Lutemon lut = enemy.createEnemyLutemon(enemyLutemonNames[level-1], level, "Normal", enemyLutemonImages[level-1]);
+        enemyLuts.add(lut);
+        enemy.setLutemons(enemyLuts);
+
+        return enemy;
+    }
 }

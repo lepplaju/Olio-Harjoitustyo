@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Enemy implements Serializable {
+    private int trainerLevel;
     private boolean isTrainer;
     private String name;
     private double difficultyMultiplier;
@@ -23,12 +24,23 @@ public class Enemy implements Serializable {
         this.isTrainer = isTrainer;
     }
 
+    public Enemy(String name, double multiplier, boolean isTrainer, int trainerLevel) {
+        this.name = name;
+        this.difficultyMultiplier = multiplier;
+        this.trainerLevel = trainerLevel;
+        this.isTrainer = isTrainer;
+    }
+
     public void setLutemons(ArrayList<Lutemon> lutemons) {
         this.lutemons = lutemons;
     }
 
     public boolean getIsTrainer() {
         return isTrainer;
+    }
+
+    public int getTrainerLevel() {
+        return trainerLevel;
     }
 
     public Lutemon createEnemyLutemon(String name, int level, String type, int image) {
@@ -46,5 +58,6 @@ public class Enemy implements Serializable {
 
         return lutemon;
     }
+
 
 }
