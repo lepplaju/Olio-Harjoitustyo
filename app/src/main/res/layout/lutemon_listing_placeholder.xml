@@ -57,6 +57,20 @@
                 android:layout_height="wrap_content"
                 android:text="Hitpoints"></TextView>
 
+            <TextView
+                android:id="@+id/attackholdertv"
+                style="@style/ListingTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="attack"></TextView>
+
+            <TextView
+                android:id="@+id/defenceholdertv"
+                style="@style/ListingTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="defence"></TextView>
+
 
         </LinearLayout>
 

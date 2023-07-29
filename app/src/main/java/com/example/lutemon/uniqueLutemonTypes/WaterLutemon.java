@@ -8,7 +8,7 @@ import java.util.Random;
 public class WaterLutemon extends Lutemon {
     public WaterLutemon(String name) {
 
-        super("Water", name);
+        super("Water", name,5);
         int min = 6;
         int max = 14;
         Random random= new Random();

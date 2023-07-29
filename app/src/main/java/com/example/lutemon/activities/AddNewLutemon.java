@@ -60,7 +60,7 @@ public class AddNewLutemon extends AppCompatActivity {
                     lutemonToAdd = new GrassLutemon(lutemonName);
                     break;
                 default:
-                    lutemonToAdd = new Lutemon("Normal", lutemonName);
+                    lutemonToAdd = new Lutemon("Normal", lutemonName, 5);
                     break;
             }
 

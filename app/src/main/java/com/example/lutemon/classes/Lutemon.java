@@ -7,6 +7,7 @@ import com.example.lutemon.adaptersAndHelpers.DamageResult;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Lutemon implements Serializable {
     private static int STARTING_LEVEL = 5;
@@ -26,10 +27,10 @@ public class Lutemon implements Serializable {
     private int maxHealth = 1;
     private int id;
 
-    public Lutemon(String type, String name) {
+    public Lutemon(String type, String name, int level) {
         this.type = type;
         this.name = name;
-        this.level = STARTING_LEVEL;
+        this.level = level;
         this.moves = setDefaultMoves();
     }
 
@@ -176,7 +177,7 @@ public class Lutemon implements Serializable {
 
     public int addExp(Lutemon enemyLutemon, Enemy enemy) {
         int baseExp = 10;
-        baseExp *= enemyLutemon.getLevel();
+        baseExp += enemyLutemon.getLevel();
         if (enemy.getIsTrainer()) {
             baseExp *= 2;
         }
@@ -194,11 +195,13 @@ public class Lutemon implements Serializable {
             public void run() {
 
                 if (expToLevel < experience) {
-                    level++;
+                    levelUp();
                     controller.setChatBoxText(name + " Levelled up to level " + getLevel() + "!");
                     controller.setLutemonLevelTV(getName() + " : level " + getLevel());
-                    experience = experience - expToLevel;
-                    expToLevel = (level - STARTING_LEVEL) * 10;
+                    controller.setLutemonHp(getHealth(), getMaxHealth());
+
+
+
                     if (expToLevel < experience) {
                         checkLevelUp(controller);
                     } else {
@@ -210,5 +213,22 @@ public class Lutemon implements Serializable {
             }
         }, 1000);
 
+    }
+
+    public void levelUp() {
+        level++;
+        experience = experience - expToLevel;
+        expToLevel = (level - STARTING_LEVEL) * 10;
+
+        int min = 1;
+        int max = 6;
+        Random random = new Random();
+        this.attack += random.nextInt(max-min) + min;
+        this.defence += random.nextInt(max-min) + min;
+        this.maxHealth += random.nextInt(max-min) + min;
+        this.health += 2*(random.nextInt(max-min) + min);
+        if (health>maxHealth){
+            health = maxHealth;
+        }
     }
 }

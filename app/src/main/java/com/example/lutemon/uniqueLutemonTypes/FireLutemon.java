@@ -8,7 +8,7 @@ import java.util.Random;
 public class FireLutemon extends Lutemon {
     public FireLutemon(String name) {
 
-        super("Fire", name);
+        super("Fire", name,5);
         int min = 5;
         int max = 15;
         Random random= new Random();

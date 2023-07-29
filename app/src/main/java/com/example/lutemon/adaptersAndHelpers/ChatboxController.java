@@ -5,14 +5,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 // This class will take care of displaying the text in the textView after any battle events.
 // The responsibilities include things such as displaying critical hits, attack misses, and effectiveness
 public class ChatboxController {
+    private ProgressBar userHealthBar;
     private FrameLayout container;
     private LinearLayout buttonLayout;
-    private TextView temporaryTextView, userLutemonTV;
+    private TextView temporaryTextView, userLutemonTV, userLutemonHp;
     private Button button1, button2, button3, button4, exitBtn;
     private boolean buttonsAreVisible = true;
     private static final long TEMPORARY_TEXT_DURATION = 3000; // Duration in milliseconds
@@ -25,7 +27,7 @@ public class ChatboxController {
         }
     };
 
-    public ChatboxController(FrameLayout container, LinearLayout buttonLayout, TextView temporaryTextView, TextView userLutemonTV,
+    public ChatboxController(FrameLayout container, LinearLayout buttonLayout, TextView temporaryTextView, TextView userLutemonTV, TextView userLutemonHp, ProgressBar userHealthBar,
                              Button button1, Button button2, Button button3, Button button4, Button exitBtn) {
         this.container = container;
         this.buttonLayout = buttonLayout;
@@ -36,6 +38,8 @@ public class ChatboxController {
         this.button4 = button4;
         this.exitBtn = exitBtn;
         this.userLutemonTV = userLutemonTV;
+        this.userLutemonHp = userLutemonHp;
+        this.userHealthBar = userHealthBar;
     }
 
     public void showTextBox() {
@@ -71,8 +75,8 @@ public class ChatboxController {
         temporaryTextView.setText(infoString);
     }
 
-    public void setLutemonLevelTV(String text){
-    userLutemonTV.setText(text);
+    public void setLutemonLevelTV(String text) {
+        userLutemonTV.setText(text);
     }
 
     public void appendChatBoxText(String infoString) {
@@ -81,6 +85,12 @@ public class ChatboxController {
 
     public void releaseResources() {
         handler.removeCallbacks(showButtonsRunnable);
+    }
+
+    public void setLutemonHp(int currentHp, int newMaxHp) {
+        userLutemonHp.setText(currentHp + "/" + newMaxHp);
+        userHealthBar.setMax(newMaxHp);
+        userHealthBar.setProgress(currentHp);
     }
 }
 

@@ -44,7 +44,7 @@ public class Enemy implements Serializable {
     }
 
     public Lutemon createEnemyLutemon(String name, int level, String type, int image) {
-        Lutemon lutemon = new Lutemon(type, name);
+        Lutemon lutemon = new Lutemon(type, name,level*7);
         lutemon.setEnemyDefaultMoves();
         int min = 5 * level;
         int max = 10 * level;

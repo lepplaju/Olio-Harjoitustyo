@@ -131,7 +131,7 @@ public class BattlePage extends AppCompatActivity {
         bottomScreenFrame = findViewById(R.id.frameContainer);
         chatboxText = findViewById(R.id.textToReplaceButtons);
         buttonContainer = findViewById(R.id.buttonContainer);
-        chatboxController = new ChatboxController(bottomScreenFrame, buttonContainer, chatboxText, userLutemonName, move1Btn, move2Btn, move3Btn, move4Btn, exitBtn);
+        chatboxController = new ChatboxController(bottomScreenFrame, buttonContainer, chatboxText, userLutemonName, userLutemonHp, userHealthBar, move1Btn, move2Btn, move3Btn, move4Btn, exitBtn);
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -275,7 +275,7 @@ public class BattlePage extends AppCompatActivity {
             public void run() {
                 endLevel();
             }
-        }, 3000);
+        }, 1500);
 
 
     }

@@ -33,11 +33,11 @@ public class LutemonListAdapter extends RecyclerView.Adapter<LutemonViewHelper> 
         Lutemon lutemon = lutemons.get(position);
         holder.name.setText("Name: " + lutemon.getName().toString());
         holder.type.setText("Type: " + lutemon.getType().toString());
-        // In order to get storage location in bold text, it needs to be in html type:
-        //String locationBold = "Location: <b>" + lutemon.getStorageLocation() + "</b>";
         holder.location.setText("Location: " + lutemon.getStorageLocation());
         holder.level.setText("Level: " + String.valueOf(lutemon.getLevel()));
-        holder.hitpoints.setText("HP: " + String.valueOf(lutemon.getHealth()) + "/" +lutemon.getMaxHealth());
+        holder.hitpoints.setText("Hitpoints: " + String.valueOf(lutemon.getHealth()) + "/" +lutemon.getMaxHealth());
+        holder.attack.setText("Attack: " + lutemon.getAttack());
+        holder.defence.setText("Defence: " + lutemon.getDefence());
         holder.image.setImageResource(lutemon.getImage());
 
     }
