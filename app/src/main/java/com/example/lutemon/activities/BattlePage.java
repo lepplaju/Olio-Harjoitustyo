@@ -93,7 +93,7 @@ public class BattlePage extends AppCompatActivity {
         userImage = findViewById(R.id.userImage);
         enemyImage = findViewById(R.id.enemyImage);
 
-        enemyImage.setImageResource(R.drawable.enemymonster1);
+        enemyImage.setImageResource(enemyLutemon.getImage());
         userImage.setImageResource(userLutemon.getImage());
 
         enemyHealthBar.setMax(enemyLutemon.getMaxHealth());
@@ -153,31 +153,10 @@ public class BattlePage extends AppCompatActivity {
             chatboxController.showTextBox();
 
             if (enemyLutemonIsAlive) userAnimation();
-            //disableButtons();
 
         }
     };
 
-
-    public void disableButtons() {
-        move1Btn.setVisibility(View.GONE);
-        move2Btn.setVisibility(View.GONE);
-        move3Btn.setVisibility(View.GONE);
-        move4Btn.setVisibility(View.GONE);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (userLutemonIsAlive) {
-                    move1Btn.setVisibility(View.VISIBLE);
-                    move2Btn.setVisibility(View.VISIBLE);
-                    move3Btn.setVisibility(View.VISIBLE);
-                    move4Btn.setVisibility(View.VISIBLE);
-                }
-            }
-        }, 2500);
-
-    }
 
     public void userAnimation() {
         int[] userLocation = new int[2];
@@ -304,9 +283,16 @@ public class BattlePage extends AppCompatActivity {
     public void destroyUserLutemon() {
         userImage.setImageResource(0);
         chatboxController.setChatBoxText(userLutemon.getName() + " Fainted");
+        chatboxController.releaseResources();
         userLutemonName.setText("");
         userLutemonHp.setText("");
         userHealthBar.setVisibility(View.GONE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                endLevelWithLoss();
+            }
+        }, 1500);
     }
 
 
@@ -377,7 +363,7 @@ public class BattlePage extends AppCompatActivity {
         int gainedExp = userLutemon.addExp(enemyLutemon, enemy);
         chatboxController.setChatBoxText(userLutemon.getName() + " gained " + gainedExp + " experience points");
         GameFile gameFile = saveFileManager.getGameFile();
-        if (enemy.getIsTrainer() == true && gameFile.getHighestLevelAvailable()==enemy.getTrainerLevel()) {
+        if (enemy.getIsTrainer() == true && gameFile.getHighestLevelAvailable() == enemy.getTrainerLevel()) {
             gameFile.levelCompleted();
         }
 
@@ -391,4 +377,10 @@ public class BattlePage extends AppCompatActivity {
         }, 2000);
     }
 
+    public void endLevelWithLoss() {
+        chatboxController.hideButtons();
+        chatboxController.setChatBoxText(userLutemon.getName() + " is dead and will be placed in the graveyard");
+        inventory.moveLutemonToGraveyard(userLutemon);
+        chatboxController.showExitBtn();
+    }
 }

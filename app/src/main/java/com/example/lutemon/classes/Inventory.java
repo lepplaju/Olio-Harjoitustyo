@@ -24,4 +24,12 @@ public class Inventory extends Storage implements Serializable {
         home.addLutemon(lutemon);
         lutemons.remove(lutemon);
     }
+    public void moveLutemonToGraveyard(Lutemon lutemon){
+        SaveFileManager saveFileManager = SaveFileManager.getInstance();
+        GameFile gameFile = saveFileManager.getGameFile();
+        Graveyard graveyard = gameFile.getGraveyard();
+        graveyard.addLutemon(lutemon);
+        lutemon.setStorageLocation("Graveyard");
+        lutemons.remove(lutemon);
+    }
 }

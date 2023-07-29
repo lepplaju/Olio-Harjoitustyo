@@ -53,7 +53,7 @@ public class Enemy implements Serializable {
         lutemon.setAttack(random.nextInt(max - min + 1) + min);
         lutemon.setDefence(random.nextInt(max - min + 1) + min);
         lutemon.setSpeed(random.nextInt(max - min + 1) + min);
-        lutemon.setMaxHealth(random.nextInt(max - min + 1));
+        lutemon.setMaxHealth(random.nextInt(max - min + 1) + min);
         lutemon.setImage(image);
 
         return lutemon;

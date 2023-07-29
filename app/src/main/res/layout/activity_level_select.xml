@@ -41,7 +41,7 @@
         android:layout_height="0dp"
         android:layout_margin="16dp"
         android:layout_marginEnd="16dp"
-        android:columnCount="4"
+        android:columnCount="2"
         android:padding="8dp"
         android:rowCount="4"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -123,82 +123,6 @@
             android:layout_columnWeight="1"
             android:layout_margin="4sp"
             android:text="Level 8" />
-
-        <Button
-            android:id="@+id/level9"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="4sp"
-            android:text="Level 9" />
-
-
-        <Button
-            android:id="@+id/level10"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="4sp"
-            android:text="Level 10" />
-
-        <Button
-            android:id="@+id/level11"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="4sp"
-            android:text="Level 11" />
-
-
-        <Button
-            android:id="@+id/level12"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="4sp"
-            android:text="Level 12" />
-
-        <Button
-            android:id="@+id/level13"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="4sp"
-            android:text="Level 13" />
-
-
-        <Button
-            android:id="@+id/level14"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="4sp"
-            android:text="Level 14" />
-
-        <Button
-            android:id="@+id/level15"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="4sp"
-            android:text="Level 15" />
-
-
-        <Button
-            android:id="@+id/level16"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="4sp"
-            android:text="Level 16" />
 
 
     </GridLayout>

@@ -149,7 +149,7 @@ public class Lutemon implements Serializable {
         ArrayList<Move> generatedMoves = new ArrayList<>();
         Move move1 = new Move("Punch", 5, 90);
         Move move2 = new Move("Kick", 9, 80);
-        Move move3 = new Move("Hype-up", 0, 100);
+        Move move3 = new Move("scratch", 2, 100);
         Move move4 = new Move(this.getType() + " blast", 6, 90);
         generatedMoves.add(move1);
         generatedMoves.add(move2);
@@ -163,7 +163,7 @@ public class Lutemon implements Serializable {
         ArrayList<Move> generatedMoves = new ArrayList<>();
         Move move1 = new Move("Tackle", 4, 90);
         Move move2 = new Move("Body-slam", 8, 80);
-        Move move3 = new Move("Rage", 0, 100);
+        Move move3 = new Move("tickle", 1, 100);
         Move move4 = new Move(this.getType() + " blast", 5, 90);
         generatedMoves.add(move1);
         generatedMoves.add(move2);

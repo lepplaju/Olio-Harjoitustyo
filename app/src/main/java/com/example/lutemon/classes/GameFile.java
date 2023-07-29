@@ -9,6 +9,7 @@ public class GameFile implements Serializable {
     private int highestLevelAvailable;
     private Inventory inventory;
     private Home home;
+    private Graveyard graveyard;
 
     public static GameFile getInstance() {
         if (gameFile == null) {
@@ -17,9 +18,14 @@ public class GameFile implements Serializable {
         return gameFile;
     }
 
+    public Graveyard getGraveyard() {
+        return graveyard;
+    }
+
     private GameFile() {
         this.inventory = Inventory.getInstance();
         this.home = Home.getInstance();
+        this.graveyard = Graveyard.getInstance();
         this.highestLevelAvailable = 1;
     }
 

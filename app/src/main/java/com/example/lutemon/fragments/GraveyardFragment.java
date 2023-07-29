@@ -7,60 +7,81 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.example.lutemon.R;
+import com.example.lutemon.classes.GameFile;
+import com.example.lutemon.classes.Graveyard;
+import com.example.lutemon.classes.Home;
+import com.example.lutemon.classes.Lutemon;
+import com.example.lutemon.classes.SaveFileManager;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link GraveyardFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
 public class GraveyardFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private RadioGroup lutemonRadioGroup;
+    private SaveFileManager saveFileManager;
+    private GameFile gameFile;
 
     public GraveyardFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GraveyardFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static GraveyardFragment newInstance(String param1, String param2) {
-        GraveyardFragment fragment = new GraveyardFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_graveyard, container, false);
+        View view = inflater.inflate(R.layout.fragment_graveyard, container, false);
+
+        lutemonRadioGroup = view.findViewById(R.id.deadLutemonRadioGroup);
+
+        makeRadioButtons();
+
+
+        Button moveBtn = view.findViewById(R.id.removeButton);
+        moveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                removeLutemon();
+            }
+        });
+
+        return view;
+    }
+
+    public void removeLutemon() {
+        saveFileManager = SaveFileManager.getInstance();
+        gameFile = saveFileManager.getGameFile();
+        Graveyard graveyard = gameFile.getGraveyard();
+        ArrayList<Lutemon> lutemonsInGraveyard = graveyard.getLutemons();
+        int id = lutemonRadioGroup.getCheckedRadioButtonId();
+        if (id != -1) {
+            View rb = lutemonRadioGroup.findViewById(id);
+            int position = lutemonRadioGroup.indexOfChild(rb);
+            Lutemon lutemon = lutemonsInGraveyard.get(position);
+            graveyard.deleteLutemonPermanently(lutemon);
+
+            makeRadioButtons();
+
+        }
+    }
+
+    private void makeRadioButtons() {
+        saveFileManager = SaveFileManager.getInstance();
+        gameFile = saveFileManager.getGameFile();
+        Graveyard graveyard = gameFile.getGraveyard();
+        lutemonRadioGroup.removeAllViews();
+        ArrayList<Lutemon> lutemonsInGraveyard = graveyard.getLutemons();
+        if (lutemonsInGraveyard != null) {
+            for (Lutemon lutemon : lutemonsInGraveyard) {
+                RadioButton rb = new RadioButton(getContext());
+                rb.setText("DEAD: " + lutemon.getName() + " type: " + lutemon.getType());
+                lutemonRadioGroup.addView(rb);
+            }
+
+        }
     }
 }
