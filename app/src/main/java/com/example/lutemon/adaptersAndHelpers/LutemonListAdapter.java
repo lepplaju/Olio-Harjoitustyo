@@ -38,6 +38,7 @@ public class LutemonListAdapter extends RecyclerView.Adapter<LutemonViewHelper> 
         holder.hitpoints.setText("Hitpoints: " + String.valueOf(lutemon.getHealth()) + "/" +lutemon.getMaxHealth());
         holder.attack.setText("Attack: " + lutemon.getAttack());
         holder.defence.setText("Defence: " + lutemon.getDefence());
+        holder.exp.setText("Experience: " + lutemon.getExperience() + "/" + lutemon.getExpToLevel());
         holder.image.setImageResource(lutemon.getImage());
 
     }

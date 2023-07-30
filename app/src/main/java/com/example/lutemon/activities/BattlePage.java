@@ -31,33 +31,19 @@ import java.util.Random;
 public class BattlePage extends AppCompatActivity {
 
     private SaveFileManager saveFileManager;
-    private boolean enemyLutemonIsAlive = true;
-    private boolean userLutemonIsAlive = true;
+    private boolean enemyLutemonIsAlive = true, userLutemonIsAlive = true;
     private Enemy enemy;
-    private Lutemon enemyLutemon;
-    private Lutemon userLutemon;
-
+    private Lutemon enemyLutemon, userLutemon;
     private ArrayList<Move> userMoves;
 
-    private TextView userLutemonHp;
-    private TextView userLutemonName;
-    private ImageView userImage;
+    private TextView userLutemonHp, userLutemonName, enemyLutemonHp, enemyLutemonName, chatboxText;
+    private ImageView userImage, enemyImage;
     private Inventory inventory;
 
-    private Button move1Btn;
-    private Button move2Btn;
-    private Button move3Btn;
-    private Button move4Btn;
-
-    private Button exitBtn;
-    private TextView enemyLutemonHp;
-    private ImageView enemyImage;
-    private TextView enemyLutemonName;
-    private ProgressBar enemyHealthBar;
-    private ProgressBar userHealthBar;
+    private Button move1Btn, move2Btn, move3Btn, move4Btn, exitBtn;
+    private ProgressBar enemyHealthBar, userHealthBar;
     private FrameLayout bottomScreenFrame;
     private LinearLayout buttonContainer;
-    private TextView chatboxText;
 
     private ChatboxController chatboxController;
     private DamageResult userDmgResult;
@@ -80,7 +66,7 @@ public class BattlePage extends AppCompatActivity {
         setChatBox();
     }
 
-    private void setFields() {
+    private void setFields() { // part of onCreate
         enemyLutemon = enemy.getLutemons().get(0);
         userLutemon = inventory.getLutemon(0);
 
@@ -107,7 +93,7 @@ public class BattlePage extends AppCompatActivity {
     }
 
 
-    private void setButtons() {
+    private void setButtons() { // part of onCreate
         userMoves = userLutemon.getMoves();
         move1Btn = findViewById(R.id.move1Btn);
         move2Btn = findViewById(R.id.move2Btn);
@@ -127,38 +113,42 @@ public class BattlePage extends AppCompatActivity {
         exitBtn.setVisibility(View.GONE);
     }
 
-    private void setChatBox() {
+    private void setChatBox() { // The class "ChatboxController" takes care of hiding the buttons, giving text feedback and modifying the textView states during a battle
         bottomScreenFrame = findViewById(R.id.frameContainer);
         chatboxText = findViewById(R.id.textToReplaceButtons);
         buttonContainer = findViewById(R.id.buttonContainer);
         chatboxController = new ChatboxController(bottomScreenFrame, buttonContainer, chatboxText, userLutemonName, userLutemonHp, userHealthBar, move1Btn, move2Btn, move3Btn, move4Btn, exitBtn);
     }
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private View.OnClickListener listener = new View.OnClickListener() { // Here we define the move-button listeners
         @Override
         public void onClick(View view) {
             int viewId = view.getId();
             if (viewId == R.id.move1Btn) {
                 userDmgResult = userLutemon.attack(userLutemon, enemyLutemon, userMoves.get(0));
+                chatboxController.showTextBox();
             } else if (viewId == R.id.move2Btn) {
                 userDmgResult = userLutemon.attack(userLutemon, enemyLutemon, userMoves.get(1));
+                chatboxController.showTextBox();
             } else if (viewId == R.id.move3Btn) {
                 userDmgResult = userLutemon.attack(userLutemon, enemyLutemon, userMoves.get(2));
+                chatboxController.showTextBox();
             } else if (viewId == R.id.move4Btn) {
                 userDmgResult = userLutemon.attack(userLutemon, enemyLutemon, userMoves.get(3));
+                chatboxController.showTextBox();
             } else if (viewId == R.id.exitBtn) {
                 Intent intent = new Intent(BattlePage.this, MainActivity.class);
                 startActivity(intent);
             }
-            chatboxController.showTextBox();
 
-            if (enemyLutemonIsAlive) userAnimation();
+
+            if (enemyLutemonIsAlive && userLutemonIsAlive) userAnimation();
 
         }
     };
 
 
-    public void userAnimation() {
+    public void userAnimation() { // The attack animation is defined here. Enemy attack animation starts once user attack is finished
         int[] userLocation = new int[2];
         int[] enemyLocation = new int[2];
 
@@ -262,7 +252,7 @@ public class BattlePage extends AppCompatActivity {
 
     }
 
-    public void destroyEnemyLutemon() {
+    public void destroyEnemyLutemon() { // If the enemy lutemon dies, we go here
         enemyImage.setImageResource(0);
         enemyLutemonName.setText("");
         enemyLutemonHp.setText("");
@@ -280,7 +270,7 @@ public class BattlePage extends AppCompatActivity {
 
     }
 
-    public void destroyUserLutemon() {
+    public void destroyUserLutemon() { // If the user lutemon dies, we go here
         userImage.setImageResource(0);
         chatboxController.setChatBoxText(userLutemon.getName() + " Fainted");
         chatboxController.releaseResources();
@@ -301,7 +291,7 @@ public class BattlePage extends AppCompatActivity {
         // This method is here to override the back button in a phone navigation bar.
     }
 
-    private void damageVisuals() {
+    private void damageVisuals() { // In this function we handle the text feedback once a user has attacked
         if (userDmgResult.isHit()) {
             chatboxController.setChatBoxText(userLutemon.getName() + " used " + userDmgResult.getMoveName());
             if (userDmgResult.isCriticalHit()) {
@@ -326,7 +316,7 @@ public class BattlePage extends AppCompatActivity {
         }
     }
 
-    private void enemyDamageVisuals() {
+    private void enemyDamageVisuals() { // In this function we handle the enemy attack turn
         Random random = new Random();
         int attackId = random.nextInt(4);
         DamageResult enemyDmgResult = enemyLutemon.attack(enemyLutemon, userLutemon, enemyLutemon.getMoves().get(attackId));
@@ -358,7 +348,7 @@ public class BattlePage extends AppCompatActivity {
 
     }
 
-    public void endLevel() {
+    public void endLevel() { // We go here if the battle is won
         chatboxController.hideButtons();
         int gainedExp = userLutemon.addExp(enemyLutemon, enemy);
         chatboxController.setChatBoxText(userLutemon.getName() + " gained " + gainedExp + " experience points");
@@ -377,7 +367,7 @@ public class BattlePage extends AppCompatActivity {
         }, 2000);
     }
 
-    public void endLevelWithLoss() {
+    public void endLevelWithLoss() { // We go here if the battle is lost
         chatboxController.hideButtons();
         chatboxController.setChatBoxText(userLutemon.getName() + " is dead and will be placed in the graveyard");
         inventory.moveLutemonToGraveyard(userLutemon);

@@ -15,10 +15,12 @@ import com.example.lutemon.classes.Lutemon;
 import com.example.lutemon.classes.SaveFileManager;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class LevelSelect extends AppCompatActivity {
-    private String[] enemyLutemonNames = {"Beastly", "Gargoleon", "Fangor", "Solaron", "Thunderstorm", "Ungnown", "Sen-Sazio", "Mambabamba"};
-    private int[] enemyLutemonImages = {R.drawable.enemymonster2, R.drawable.enemymonster1, R.drawable.monster3, R.drawable.monster4, R.drawable.monster5, R.drawable.monster6, R.drawable.monster7, R.drawable.monster8};
+    private String[] enemyLutemonNames = {"Beastly", "Gargoleon", "Deezer", "Solaron", "Mr.Happy", "Ungnown", "Untameable", "Mambabamba"};
+    private String[] enemyTrainingLutemonNames = {"Gloomfang", "Frostwraith", "Thornback", "Stormhowler", "Duskwraith", "Emberclaw", "Tidebreaker", "Sunshrike", "Bouldercrest", "Mistshroud", "Fangor", "Driftclaw", "Bramblethorn", "Shadowpounce", "Hentojalka"};
+    private int[] enemyLutemonImages = {R.drawable.enemymonster2, R.drawable.enemymonster1, R.drawable.monster3, R.drawable.monster4, R.drawable.monster5, R.drawable.monster6, R.drawable.monster7, R.drawable.monster8, R.drawable.firemonster, R.drawable.grassmonster, R.drawable.watermonster, R.drawable.monster9, R.drawable.monster10};
     private GridLayout buttonsContainer;
     private SaveFileManager saveFileManager;
 
@@ -34,18 +36,6 @@ public class LevelSelect extends AppCompatActivity {
         lockButtons();
     }
 
-    public void goTrain() {
-        Lutemon lutemonInInventory = saveFileManager.getGameFile().getInventory().getLutemon(0);
-        Enemy enemy = new Enemy("training", 1, false);
-        ArrayList<Lutemon> enemyLuts = new ArrayList<>();
-        Lutemon lut = enemy.createEnemyLutemon("Booo", lutemonInInventory.getLevel() / 2, "Normal", R.drawable.enemymonster2);
-        enemyLuts.add(lut);
-        enemy.setLutemons(enemyLuts);
-
-        Intent intent = new Intent(this, BattlePage.class);
-        intent.putExtra("enemy", enemy);
-        startActivity(intent);
-    }
 
     private void lockButtons() {
         saveFileManager = SaveFileManager.getInstance();
@@ -153,5 +143,22 @@ public class LevelSelect extends AppCompatActivity {
         enemy.setLutemons(enemyLuts);
 
         return enemy;
+    }
+
+    public void goTrain() {
+        Lutemon lutemonInInventory = saveFileManager.getGameFile().getInventory().getLutemon(0);
+        Random random = new Random();
+        Enemy enemy = new Enemy("training", 1, false);
+        int image = enemyLutemonImages[random.nextInt(enemyLutemonImages.length)];
+        String name = enemyTrainingLutemonNames[random.nextInt(enemyTrainingLutemonNames.length)];
+        ArrayList<Lutemon> enemyLuts = new ArrayList<>();
+        Lutemon lut = enemy.createTrainingLutemon(name, lutemonInInventory.getLevel()/2,"Normal",image);
+
+        enemyLuts.add(lut);
+        enemy.setLutemons(enemyLuts);
+
+        Intent intent = new Intent(this, BattlePage.class);
+        intent.putExtra("enemy", enemy);
+        startActivity(intent);
     }
 }

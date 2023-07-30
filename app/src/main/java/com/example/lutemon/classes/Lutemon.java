@@ -20,12 +20,17 @@ public class Lutemon implements Serializable {
     private String type;
     private int attack = 1;
     private int defence = 1;
-    private int experience = 1;
+    private int experience = 0;
     private int expToLevel = 10;
     private int health = 1;
     private int speed = 0;
     private int maxHealth = 1;
     private int id;
+
+
+    public Lutemon(int level) {// This is the constructor for enemy Lutemons in training areana
+        this.level = level;
+    }
 
     public Lutemon(String type, String name, int level) {
         this.type = type;
@@ -45,10 +50,6 @@ public class Lutemon implements Serializable {
         this.moves = setDefaultMoves();
     }
 
-
-    public void defence(Lutemon lutemon) {
-
-    }
 
     public DamageResult attack(Lutemon attackerLutemon, Lutemon targetLutemon, Move move) {
         DamageResult dmgCalculation = move.calculateDmg(attackerLutemon.getAttack(), targetLutemon.getDefence(), move.getAccuracy(), 1);
@@ -162,10 +163,24 @@ public class Lutemon implements Serializable {
 
     public ArrayList<Move> setEnemyDefaultMoves() {
         ArrayList<Move> generatedMoves = new ArrayList<>();
-        Move move1 = new Move("Tackle", 4, 90);
-        Move move2 = new Move("Body-slam", 8, 80);
-        Move move3 = new Move("tickle", 1, 100);
-        Move move4 = new Move(this.getType() + " blast", 5, 90);
+        Move move1 = new Move("Tackle", 2, 90);
+        Move move2 = new Move("Body-slam", 3, 80);
+        Move move3 = new Move("Tickle", 1, 100);
+        Move move4 = new Move("Headbutt", 5, 70);
+        generatedMoves.add(move1);
+        generatedMoves.add(move2);
+        generatedMoves.add(move3);
+        generatedMoves.add(move4);
+        this.moves = generatedMoves;
+        return generatedMoves;
+    }
+
+    public ArrayList<Move> setEnemyBossMoves() {
+        ArrayList<Move> generatedMoves = new ArrayList<>();
+        Move move1 = new Move("Uppercut", 4, 90);
+        Move move2 = new Move("Elbow", 6, 80);
+        Move move3 = new Move("Poke", 2, 100);
+        Move move4 = new Move("Hyper Blast", 8, 70);
         generatedMoves.add(move1);
         generatedMoves.add(move2);
         generatedMoves.add(move3);
@@ -176,12 +191,13 @@ public class Lutemon implements Serializable {
 
 
     public int addExp(Lutemon enemyLutemon, Enemy enemy) {
-        int baseExp = 10;
-        baseExp += enemyLutemon.getLevel();
+        int baseExp = 5;
+        baseExp *= enemyLutemon.getLevel();
         if (enemy.getIsTrainer()) {
             baseExp *= 2;
         }
         baseExp += enemyLutemon.getMaxHealth() / 2;
+
 
         this.experience += baseExp;
         return baseExp;
@@ -194,12 +210,11 @@ public class Lutemon implements Serializable {
             @Override
             public void run() {
 
-                if (expToLevel < experience) {
+                if (expToLevel <= experience) {
                     levelUp();
                     controller.setChatBoxText(name + " Levelled up to level " + getLevel() + "!");
                     controller.setLutemonLevelTV(getName() + " : level " + getLevel());
                     controller.setLutemonHp(getHealth(), getMaxHealth());
-
 
 
                     if (expToLevel < experience) {
@@ -220,15 +235,19 @@ public class Lutemon implements Serializable {
         experience = experience - expToLevel;
         expToLevel = (level - STARTING_LEVEL) * 10;
 
-        int min = 1;
+        int min = 2;
         int max = 6;
         Random random = new Random();
-        this.attack += random.nextInt(max-min) + min;
-        this.defence += random.nextInt(max-min) + min;
-        this.maxHealth += random.nextInt(max-min) + min;
-        this.health += 2*(random.nextInt(max-min) + min);
-        if (health>maxHealth){
+        this.attack += random.nextInt(max - min) + min;
+        this.defence += random.nextInt(max - min) + min;
+        this.maxHealth += random.nextInt(max - min) + min;
+        this.health += 2 * (random.nextInt(max - min) + min);
+        if (health > maxHealth) {
             health = maxHealth;
         }
+    }
+
+    public int getExpToLevel() {
+        return expToLevel;
     }
 }
