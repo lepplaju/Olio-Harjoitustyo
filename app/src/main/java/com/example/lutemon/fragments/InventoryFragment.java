@@ -78,7 +78,7 @@ public class InventoryFragment extends Fragment {
         if (lutemonsInInventory != null) {
             for (Lutemon lutemon : lutemonsInInventory) {
                 RadioButton rb = new RadioButton(getContext());
-                rb.setText(lutemon.getName() + " type: " + lutemon.getType());
+                rb.setText(lutemon.getName() + " - level: " + lutemon.getLevel());
                 lutemonRadioGroupInventory.addView(rb);
             }
         }

@@ -233,7 +233,7 @@ public class Lutemon implements Serializable {
     public void levelUp() {
         level++;
         experience = experience - expToLevel;
-        expToLevel = (level - STARTING_LEVEL) * 10;
+        expToLevel = 10 + (5 * (level - STARTING_LEVEL));
 
         int min = 2;
         int max = 6;

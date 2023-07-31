@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
         if (lutemonsInHome != null) {
             for (Lutemon lutemon : lutemonsInHome) {
                 RadioButton rb = new RadioButton(getContext());
-                rb.setText(lutemon.getName() + " type: " + lutemon.getType());
+                rb.setText(lutemon.getName() + " - level: " + lutemon.getLevel());
                 lutemonRadioGroup.addView(rb);
             }
 

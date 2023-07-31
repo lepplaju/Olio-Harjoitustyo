@@ -78,7 +78,7 @@ public class GraveyardFragment extends Fragment {
         if (lutemonsInGraveyard != null) {
             for (Lutemon lutemon : lutemonsInGraveyard) {
                 RadioButton rb = new RadioButton(getContext());
-                rb.setText("DEAD: " + lutemon.getName() + " type: " + lutemon.getType());
+                rb.setText("DEAD: " + lutemon.getName() + " - was level: " + lutemon.getLevel());
                 lutemonRadioGroup.addView(rb);
             }
 
